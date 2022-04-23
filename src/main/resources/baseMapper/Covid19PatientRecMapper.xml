@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lis.BaseModel.mapper.Covid19PatientRecMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.lis.BaseModel.entity.Covid19PatientRec">
+        <id column="id" property="id" />
+        <id column="sex" property="sex" />
+        <id column="age" property="age" />
+        <id column="idCard" property="idCard" />
+        <id column="phoneNumber" property="phoneNumber" />
+        <id column="spcm_id" property="spcmId" />
+        <id column="rpt_id" property="rptId" />
+        <id column="chkrcv_time" property="chkrcvTime" />
+        <result column="name" property="name" />
+        <result column="pat_info" property="patInfo" />
+        <result column="rpt_time" property="rptTime" />
+        <result column="spcm_bc" property="spcmBc" />
+    </resultMap>
+
+</mapper>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lis.BaseModel.mapper.EqpmtnPlanMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.lis.BaseModel.entity.EqpmtnPlan">
+        <id column="eqpmtn_plan_id" property="eqpmtnPlanId" />
+        <id column="eqp_name" property="eqpName" />
+        <id column="eqpmtn_type_id" property="eqpmtnTypeId" />
+        <id column="eqpmtn_type_cycle" property="eqpmtnTypeCycle" />
+        <id column="eqpmtn_plan_name" property="eqpmtnPlanName" />
+        <id column="plan_type" property="planType" />
+        <id column="eqpmtn_plan_time_start" property="eqpmtnPlanTimeStart" />
+        <id column="eqpmtn_plan_addr" property="eqpmtnPlanAddr" />
+        <result column="eqp_id" property="eqpId" />
+        <result column="eqpmtn_plan_time_end" property="eqpmtnPlanTimeEnd" />
+        <result column="eqpmtn_plan_desc" property="eqpmtnPlanDesc" />
+        <result column="eqpmtn_rec_id" property="eqpmtnRecId" />
+        <result column="proc_status" property="procStatus" />
+        <result column="eqpmtn_class_name" property="eqpmtnClassName" />
+    </resultMap>
+
+</mapper>

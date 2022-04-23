@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lis.BaseModel.mapper.CollectInvoiceMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.lis.BaseModel.entity.CollectInvoice">
+        <id column="invoice_id" property="invoiceId" />
+        <id column="container_id" property="containerId" />
+        <id column="container_dict_id" property="containerDictId" />
+        <id column="specimen_bc" property="specimenBc" />
+        <id column="collect_method_code" property="collectMethodCode" />
+        <id column="collect_method_name" property="collectMethodName" />
+        <id column="collect_bodysite_code" property="collectBodysiteCode" />
+        <id column="collect_ocas_code" property="collectOcasCode" />
+        <result column="collect_task_id" property="collectTaskId" />
+        <result column="collect_bodysite_name" property="collectBodysiteName" />
+        <result column="collect_ocas_name" property="collectOcasName" />
+        <result column="specimen_id" property="specimenId" />
+        <result column="specimen_name" property="specimenName" />
+        <result column="is_urgent" property="isUrgent" />
+    </resultMap>
+
+</mapper>

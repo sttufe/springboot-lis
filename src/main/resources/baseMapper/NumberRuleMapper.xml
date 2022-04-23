@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lis.BaseModel.mapper.NumberRuleMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.lis.BaseModel.entity.NumberRule">
+        <id column="number_rule_id" property="numberRuleId" />
+        <id column="number_rule_prefix" property="numberRulePrefix" />
+        <id column="number_rule_length" property="numberRuleLength" />
+        <id column="patient_type" property="patientType" />
+        <id column="visit_type" property="visitType" />
+        <id column="age_lower_imit" property="ageLowerImit" />
+        <id column="age_high_imit" property="ageHighImit" />
+        <id column="creat_time" property="creatTime" />
+        <result column="number_rule_name" property="numberRuleName" />
+        <result column="creater" property="creater" />
+        <result column="call_priority" property="callPriority" />
+        <result column="use_tate" property="useTate" />
+    </resultMap>
+
+</mapper>

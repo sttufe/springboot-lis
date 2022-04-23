@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lis.BaseModel.mapper.CommunicationRecMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.lis.BaseModel.entity.CommunicationRec">
+        <id column="id" property="id" />
+        <id column="pat_name" property="patName" />
+        <id column="received" property="received" />
+        <id column="category" property="category" />
+        <id column="statusReason_coding_code" property="statusreasonCodingCode" />
+        <id column="status" property="status" />
+        <id column="specimen_id" property="specimenId" />
+        <id column="recorder_organization_id" property="recorderOrganizationId" />
+        <result column="pid" property="pid" />
+        <result column="sent" property="sent" />
+        <result column="servicerequest_id" property="servicerequestId" />
+        <result column="order_id" property="orderId" />
+        <result column="basedOn_reference" property="basedonReference" />
+        <result column="ex_inResponseTo_Practitioner" property="exInresponsetoPractitioner" />
+        <result column="ex_encounter_type" property="exEncounterType" />
+        <result column="ex_encounter_display" property="exEncounterDisplay" />
+        <result column="ex_encounter_no" property="exEncounterNo" />
+        <result column="ex_pat_dept_id" property="exPatDeptId" />
+        <result column="ex_pat_dept_name" property="exPatDeptName" />
+        <result column="ex_inp_ward_id" property="exInpWardId" />
+        <result column="ex_inp_ward_name" property="exInpWardName" />
+        <result column="ex_bed_no" property="exBedNo" />
+    </resultMap>
+
+</mapper>

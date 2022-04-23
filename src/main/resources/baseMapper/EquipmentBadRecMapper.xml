@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lis.BaseModel.mapper.EquipmentBadRecMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.lis.BaseModel.entity.EquipmentBadRec">
+        <id column="id" property="id" />
+        <id column="reporter" property="reporter" />
+        <id column="bad_happen_date" property="badHappenDate" />
+        <id column="bad_know_date" property="badKnowDate" />
+        <id column="bad_event" property="badEvent" />
+        <id column="consequence" property="consequence" />
+        <id column="event_state" property="eventState" />
+        <id column="reason_analysis" property="reasonAnalysis" />
+        <result column="equipment_id" property="equipmentId" />
+        <result column="operationer" property="operationer" />
+        <result column="notice" property="notice" />
+    </resultMap>
+
+</mapper>

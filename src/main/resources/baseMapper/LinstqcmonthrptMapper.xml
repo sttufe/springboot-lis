@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lis.BaseModel.mapper.LinstqcmonthrptMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.lis.BaseModel.entity.Linstqcmonthrpt">
+        <id column="id" property="id" />
+        <id column="loiteminfo" property="loiteminfo" />
+        <id column="rptinfo" property="rptinfo" />
+        <id column="labistrmt_id" property="labistrmtId" />
+        <id column="labistrmt_name" property="labistrmtName" />
+        <id column="rpt_time" property="rptTime" />
+        <id column="loitem_name" property="loitemName" />
+        <id column="linstqcitem_id" property="linstqcitemId" />
+        <result column="chartjson" property="chartjson" />
+        <result column="loitem_id" property="loitemId" />
+        <result column="linstqcitem_name" property="linstqcitemName" />
+        <result column="status" property="status" />
+    </resultMap>
+
+</mapper>

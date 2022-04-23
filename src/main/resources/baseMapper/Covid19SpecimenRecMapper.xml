@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lis.BaseModel.mapper.Covid19SpecimenRecMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.lis.BaseModel.entity.Covid19SpecimenRec">
+        <id column="lis_spcm_id" property="lisSpcmId" />
+        <id column="id" property="id" />
+        <id column="combinedSpecimenNumber" property="combinedSpecimenNumber" />
+        <id column="specimenNumber" property="specimenNumber" />
+        <id column="collectionTime" property="collectionTime" />
+        <id column="collector" property="collector" />
+        <id column="macAddress" property="macAddress" />
+        <id column="makesPeople" property="makesPeople" />
+        <result column="lis_rpt_id" property="lisRptId" />
+        <result column="terminalNote" property="terminalNote" />
+        <result column="makesTime" property="makesTime" />
+        <result column="makesOrganizationCode" property="makesOrganizationCode" />
+        <result column="makesOrganizationName" property="makesOrganizationName" />
+        <result column="acceptanceCheck" property="acceptanceCheck" />
+        <result column="acceptanceCheckTime" property="acceptanceCheckTime" />
+        <result column="nosocomialSpecimenID" property="nosocomialSpecimenID" />
+        <result column="reporter" property="reporter" />
+        <result column="reportOnTime" property="reportOnTime" />
+        <result column="specimenState" property="specimenState" />
+        <result column="residentInfos" property="residentInfos" />
+    </resultMap>
+
+</mapper>

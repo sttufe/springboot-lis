@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lis.BaseModel.mapper.DevicedefinitionObservationdefinitionMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.lis.BaseModel.entity.DevicedefinitionObservationdefinition">
+        <id column="id" property="id" />
+        <id column="devicedefinition_id" property="devicedefinitionId" />
+        <id column="pipline_code" property="piplineCode" />
+        <id column="taking_time" property="takingTime" />
+        <id column="observationdefinition_cost" property="observationdefinitionCost" />
+        <id column="ex_Conversion_ratio" property="exConversionRatio" />
+        <id column="ex_Result_transformation" property="exResultTransformation" />
+        <id column="ex_qccode" property="exQccode" />
+        <result column="observationdefinition_id" property="observationdefinitionId" />
+        <result column="ex_default_results" property="exDefaultResults" />
+        <result column="sno" property="sno" />
+        <result column="ex_oneChooseCode" property="exOnechoosecode" />
+    </resultMap>
+
+</mapper>

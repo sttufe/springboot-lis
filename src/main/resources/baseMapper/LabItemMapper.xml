@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lis.BaseModel.mapper.LabItemMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.lis.BaseModel.entity.LabItem">
+        <id column="id" property="id" />
+        <id column="name" property="name" />
+        <id column="category" property="category" />
+        <id column="description" property="description" />
+        <id column="status" property="status" />
+        <id column="timestamp" property="timestamp" />
+        <id column="hisid" property="hisid" />
+        <id column="ex_abbreviation_display" property="exAbbreviationDisplay" />
+        <result column="code" property="code" />
+        <result column="ex_hideItem" property="exHideitem" />
+        <result column="ex_abbreviation_enable" property="exAbbreviationEnable" />
+    </resultMap>
+
+</mapper>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lis.BaseModel.mapper.SpecimenRecMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.lis.BaseModel.entity.SpecimenRec">
+        <id column="id" property="id" />
+        <id column="pid" property="pid" />
+        <id column="pat_name" property="patName" />
+        <id column="specimen_id" property="specimenId" />
+        <id column="status" property="status" />
+        <id column="infctdz_sign" property="infctdzSign" />
+        <id column="priority" property="priority" />
+        <id column="collection_id" property="collectionId" />
+        <result column="identifier_value1bc" property="identifierValue1bc" />
+        <result column="condition_code" property="conditionCode" />
+        <result column="procedure_id" property="procedureId" />
+        <result column="splitstatus" property="splitstatus" />
+        <result column="split_value1bc" property="splitValue1bc" />
+        <result column="encounter_type_code" property="encounterTypeCode" />
+        <result column="encounter_type" property="encounterType" />
+        <result column="encounter_no" property="encounterNo" />
+        <result column="uniqueid" property="uniqueid" />
+        <result column="ex_eobject" property="exEobject" />
+        <result column="ex_egcode" property="exEgcode" />
+        <result column="ex_egname" property="exEgname" />
+        <result column="ex_etaskno" property="exEtaskno" />
+        <result column="ex_etaskname" property="exEtaskname" />
+        <result column="ex_id_card_no" property="exIdCardNo" />
+        <result column="ex_visit_card_no" property="exVisitCardNo" />
+        <result column="duplex_identification" property="duplexIdentification" />
+        <result column="unitcode" property="unitcode" />
+        <result column="unitname" property="unitname" />
+    </resultMap>
+
+</mapper>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lis.BaseModel.mapper.EqpmtnRecMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.lis.BaseModel.entity.EqpmtnRec">
+        <id column="eqpmtn_rec_id" property="eqpmtnRecId" />
+        <id column="eqp_name" property="eqpName" />
+        <id column="eqpmtn_type_id" property="eqpmtnTypeId" />
+        <id column="eqpmtn_type_cycle" property="eqpmtnTypeCycle" />
+        <id column="eqpmtn_plan_time" property="eqpmtnPlanTime" />
+        <id column="eqpmtn_rec_exetime" property="eqpmtnRecExetime" />
+        <id column="dept_id" property="deptId" />
+        <id column="eqpmtn_rec_exetr_id" property="eqpmtnRecExetrId" />
+        <result column="eqp_id" property="eqpId" />
+        <result column="dept_name" property="deptName" />
+        <result column="eqpmtn_rec_exetr" property="eqpmtnRecExetr" />
+        <result column="eqpmtn_rec_desc" property="eqpmtnRecDesc" />
+        <result column="eqpmtn_rec_creator_id" property="eqpmtnRecCreatorId" />
+        <result column="eqpmtn_rec_creator" property="eqpmtnRecCreator" />
+        <result column="eqpmtn_rec_create_time" property="eqpmtnRecCreateTime" />
+        <result column="eqp_domain" property="eqpDomain" />
+    </resultMap>
+
+</mapper>

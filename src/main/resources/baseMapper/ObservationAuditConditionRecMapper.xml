@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lis.BaseModel.mapper.ObservationAuditConditionRecMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.lis.BaseModel.entity.ObservationAuditConditionRec">
+        <id column="id" property="id" />
+        <id column="name" property="name" />
+        <id column="classification" property="classification" />
+        <id column="item_id" property="itemId" />
+        <id column="linstq_id" property="linstqId" />
+        <result column="code_text" property="codeText" />
+    </resultMap>
+
+</mapper>

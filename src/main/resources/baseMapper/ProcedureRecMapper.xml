@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lis.BaseModel.mapper.ProcedureRecMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.lis.BaseModel.entity.ProcedureRec">
+        <id column="id" property="id" />
+        <id column="pat_name" property="patName" />
+        <id column="code_coding_code" property="codeCodingCode" />
+        <id column="organization_id" property="organizationId" />
+        <id column="actor_id" property="actorId" />
+        <id column="status" property="status" />
+        <id column="location_id" property="locationId" />
+        <id column="source_id" property="sourceId" />
+        <result column="pid" property="pid" />
+        <result column="performedDateTime" property="performedDateTime" />
+        <result column="partOf_reference1Procedure" property="partofReference1procedure" />
+        <result column="source_table" property="sourceTable" />
+        <result column="ex_encounter_type" property="exEncounterType" />
+        <result column="ex_encounter_display" property="exEncounterDisplay" />
+        <result column="ex_encounter_reference1encounter" property="exEncounterReference1encounter" />
+        <result column="ex_bed_no" property="exBedNo" />
+        <result column="ex_id_card_no" property="exIdCardNo" />
+        <result column="ex_visit_card_no" property="exVisitCardNo" />
+    </resultMap>
+
+</mapper>

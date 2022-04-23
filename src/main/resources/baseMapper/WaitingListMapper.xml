@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lis.BaseModel.mapper.WaitingListMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.lis.BaseModel.entity.WaitingList">
+        <id column="waiting_list_id" property="waitingListId" />
+        <id column="patient_name" property="patientName" />
+        <id column="patient_age" property="patientAge" />
+        <id column="treatment_source" property="treatmentSource" />
+        <id column="treatment_number" property="treatmentNumber" />
+        <id column="id_number" property="idNumber" />
+        <id column="medical_insurance_card" property="medicalInsuranceCard" />
+        <id column="call_office_id" property="callOfficeId" />
+        <result column="patient_id" property="patientId" />
+        <result column="one_card" property="oneCard" />
+        <result column="call_office_name" property="callOfficeName" />
+        <result column="sequence_number" property="sequenceNumber" />
+        <result column="call_number" property="callNumber" />
+        <result column="get_time" property="getTime" />
+        <result column="print_state" property="printState" />
+        <result column="print_time" property="printTime" />
+        <result column="call_priority" property="callPriority" />
+        <result column="clct_method" property="clctMethod" />
+    </resultMap>
+
+</mapper>

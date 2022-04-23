@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lis.BaseModel.mapper.ServicerequestRecMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.lis.BaseModel.entity.ServicerequestRec">
+        <id column="id" property="id" />
+        <id column="pat_name" property="patName" />
+        <id column="encounter" property="encounter" />
+        <id column="encounter_servicetype" property="encounterServicetype" />
+        <id column="servicerequest_code" property="servicerequestCode" />
+        <id column="servicerequest_authoredon" property="servicerequestAuthoredon" />
+        <id column="pat_infctdz_sign" property="patInfctdzSign" />
+        <id column="status" property="status" />
+        <result column="pid" property="pid" />
+        <result column="priority" property="priority" />
+        <result column="requisition_value" property="requisitionValue" />
+        <result column="servicerequest_organization" property="servicerequestOrganization" />
+        <result column="procedure_id" property="procedureId" />
+        <result column="ex_condition_code" property="exConditionCode" />
+        <result column="ex_condition_display" property="exConditionDisplay" />
+        <result column="basedOn_reference" property="basedonReference" />
+        <result column="ex_source_system" property="exSourceSystem" />
+        <result column="ex_eobject" property="exEobject" />
+        <result column="ex_egcode" property="exEgcode" />
+        <result column="ex_egname" property="exEgname" />
+        <result column="ex_etaskno" property="exEtaskno" />
+        <result column="ex_etaskname" property="exEtaskname" />
+        <result column="ex_id_card_no" property="exIdCardNo" />
+        <result column="ex_visit_card_no" property="exVisitCardNo" />
+        <result column="calculation_num" property="calculationNum" />
+        <result column="unitcode" property="unitcode" />
+        <result column="unitname" property="unitname" />
+    </resultMap>
+
+</mapper>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lis.BaseModel.mapper.ManyCallRecordMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.lis.BaseModel.entity.ManyCallRecord">
+        <id column="many_call_record_id" property="manyCallRecordId" />
+        <id column="called_list_id" property="calledListId" />
+        <id column="call_window_id" property="callWindowId" />
+        <id column="call_window_name" property="callWindowName" />
+        <id column="callers" property="callers" />
+        <id column="get_time" property="getTime" />
+        <result column="sequence_number" property="sequenceNumber" />
+    </resultMap>
+
+</mapper>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lis.BaseModel.mapper.SpecimenSubmittedRecMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.lis.BaseModel.entity.SpecimenSubmittedRec">
+        <id column="send_no" property="sendNo" />
+        <id column="sndr_no" property="sndrNo" />
+        <id column="sndr_id" property="sndrId" />
+        <id column="specimen_json" property="specimenJson" />
+        <id column="send_organization_id" property="sendOrganizationId" />
+        <id column="receiving_organization_id" property="receivingOrganizationId" />
+        <id column="status" property="status" />
+        <result column="procedure_id" property="procedureId" />
+        <result column="submitted_datetime" property="submittedDatetime" />
+    </resultMap>
+
+</mapper>

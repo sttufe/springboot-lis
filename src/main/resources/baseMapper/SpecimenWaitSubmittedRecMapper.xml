@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lis.BaseModel.mapper.SpecimenWaitSubmittedRecMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.lis.BaseModel.entity.SpecimenWaitSubmittedRec">
+        <id column="bc_no" property="bcNo" />
+        <id column="pat_name" property="patName" />
+        <id column="organization_id" property="organizationId" />
+        <id column="location_id" property="locationId" />
+        <id column="collected_datetime" property="collectedDatetime" />
+        <id column="specimen_id" property="specimenId" />
+        <id column="procedure_id" property="procedureId" />
+        <id column="receiving_organization_name" property="receivingOrganizationName" />
+        <result column="pid" property="pid" />
+        <result column="receiving_organization_id" property="receivingOrganizationId" />
+        <result column="receiving_location_id" property="receivingLocationId" />
+        <result column="receiving_location_name" property="receivingLocationName" />
+    </resultMap>
+
+</mapper>

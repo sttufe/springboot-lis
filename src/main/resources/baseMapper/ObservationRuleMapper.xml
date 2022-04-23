@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lis.BaseModel.mapper.ObservationRuleMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.lis.BaseModel.entity.ObservationRule">
+        <id column="id" property="id" />
+        <id column="ruletype" property="ruletype" />
+        <id column="judging" property="judging" />
+        <id column="observation_name" property="observationName" />
+        <id column="observation_id" property="observationId" />
+        <id column="conditiontype" property="conditiontype" />
+        <id column="conditionresult" property="conditionresult" />
+        <id column="status" property="status" />
+        <result column="ruleid" property="ruleid" />
+        <result column="conditionvalus" property="conditionvalus" />
+        <result column="rulename" property="rulename" />
+        <result column="observationset_id" property="observationsetId" />
+        <result column="observationset_name" property="observationsetName" />
+        <result column="note_text" property="noteText" />
+    </resultMap>
+
+</mapper>

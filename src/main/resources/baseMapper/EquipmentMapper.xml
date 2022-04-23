@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lis.BaseModel.mapper.EquipmentMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.lis.BaseModel.entity.Equipment">
+        <id column="equipment_id" property="equipmentId" />
+        <id column="equipment_type" property="equipmentType" />
+        <id column="eprentp_id" property="eprentpId" />
+        <id column="equipment_status" property="equipmentStatus" />
+        <id column="equipment_production_time" property="equipmentProductionTime" />
+        <id column="equipment_life" property="equipmentLife" />
+        <id column="equipment_scrap_time" property="equipmentScrapTime" />
+        <id column="equipment_filing_time" property="equipmentFilingTime" />
+        <result column="equipment_name" property="equipmentName" />
+        <result column="equipment_filinger" property="equipmentFilinger" />
+        <result column="equipment_remarks" property="equipmentRemarks" />
+        <result column="equipment_scrap_reason" property="equipmentScrapReason" />
+        <result column="organization_id" property="organizationId" />
+        <result column="last_modification_time" property="lastModificationTime" />
+        <result column="eqp_ip" property="eqpIp" />
+        <result column="address" property="address" />
+        <result column="last_modificationer" property="lastModificationer" />
+        <result column="modes_info" property="modesInfo" />
+    </resultMap>
+
+</mapper>

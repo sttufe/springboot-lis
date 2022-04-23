@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lis.BaseModel.mapper.ObservationRecMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.lis.BaseModel.entity.ObservationRec">
+        <id column="id" property="id" />
+        <id column="specimen_id" property="specimenId" />
+        <id column="devicedefinition_id" property="devicedefinitionId" />
+        <id column="observationdefinition_id" property="observationdefinitionId" />
+        <id column="specimen_reference1Specimen" property="specimenReference1specimen" />
+        <id column="status" property="status" />
+        <id column="issued_datetime" property="issuedDatetime" />
+        <id column="ex_valuedo" property="exValuedo" />
+        <result column="procedure_id" property="procedureId" />
+        <result column="ex_reexamination" property="exReexamination" />
+        <result column="ex_merge_sign" property="exMergeSign" />
+        <result column="merge_id" property="mergeId" />
+    </resultMap>
+
+</mapper>

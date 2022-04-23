@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lis.BaseModel.mapper.CovidSpecimenRecMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.lis.BaseModel.entity.CovidSpecimenRec">
+        <id column="id" property="id" />
+        <id column="system" property="system" />
+        <id column="spcm_id" property="spcmId" />
+        <id column="rpt_id" property="rptId" />
+        <id column="spcm_bc" property="spcmBc" />
+        <id column="send_bc" property="sendBc" />
+        <id column="labitem_id" property="labitemId" />
+        <id column="labitem_name" property="labitemName" />
+        <result column="system_code" property="systemCode" />
+        <result column="labitem_code" property="labitemCode" />
+        <result column="spcm_type_code" property="spcmTypeCode" />
+        <result column="spcm_type" property="spcmType" />
+        <result column="collct_mac" property="collctMac" />
+        <result column="collct_ip" property="collctIp" />
+        <result column="collct_ssite" property="collctSsite" />
+        <result column="collct_staff" property="collctStaff" />
+        <result column="collct_dept" property="collctDept" />
+        <result column="collct_time" property="collctTime" />
+        <result column="send_staff" property="sendStaff" />
+        <result column="send_dept" property="sendDept" />
+        <result column="send_org_code" property="sendOrgCode" />
+        <result column="send_org" property="sendOrg" />
+        <result column="send_time" property="sendTime" />
+        <result column="laboratory_code" property="laboratoryCode" />
+        <result column="laboratory" property="laboratory" />
+        <result column="chkrcv_staff" property="chkrcvStaff" />
+        <result column="chkrcv_dept" property="chkrcvDept" />
+        <result column="chkrcv_time" property="chkrcvTime" />
+        <result column="report_staff" property="reportStaff" />
+        <result column="report_dept" property="reportDept" />
+        <result column="report_time" property="reportTime" />
+        <result column="test_ratio" property="testRatio" />
+        <result column="spcm_state" property="spcmState" />
+        <result column="result" property="result" />
+        <result column="pid" property="pid" />
+        <result column="pat_name" property="patName" />
+        <result column="gender_code" property="genderCode" />
+        <result column="gender" property="gender" />
+        <result column="age" property="age" />
+        <result column="idcard" property="idcard" />
+        <result column="birthday" property="birthday" />
+        <result column="nationality" property="nationality" />
+        <result column="nation" property="nation" />
+        <result column="hometown" property="hometown" />
+        <result column="address" property="address" />
+        <result column="phone_number" property="phoneNumber" />
+        <result column="emergency_contact" property="emergencyContact" />
+        <result column="emergency_phone" property="emergencyPhone" />
+    </resultMap>
+
+</mapper>

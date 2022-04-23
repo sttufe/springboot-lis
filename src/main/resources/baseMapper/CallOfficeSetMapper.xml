@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lis.BaseModel.mapper.CallOfficeSetMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.lis.BaseModel.entity.CallOfficeSet">
+        <id column="call_office_id" property="callOfficeId" />
+        <id column="use_tate" property="useTate" />
+        <id column="use_time" property="useTime" />
+        <id column="creater" property="creater" />
+        <id column="creat_time" property="creatTime" />
+        <id column="last_reviser" property="lastReviser" />
+        <id column="last_modify_time" property="lastModifyTime" />
+        <result column="call_office_name" property="callOfficeName" />
+        <result column="display_address" property="displayAddress" />
+    </resultMap>
+
+</mapper>

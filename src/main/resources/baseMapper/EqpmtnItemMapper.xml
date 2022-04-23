@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lis.BaseModel.mapper.EqpmtnItemMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.lis.BaseModel.entity.EqpmtnItem">
+        <id column="eqpmtn_item_id" property="eqpmtnItemId" />
+        <id column="eqpmtn_type_id" property="eqpmtnTypeId" />
+        <id column="eqpmtn_item_sno" property="eqpmtnItemSno" />
+        <id column="eqpmtn_item_datatype_code" property="eqpmtnItemDatatypeCode" />
+        <id column="eqpmtn_item_datatype_name" property="eqpmtnItemDatatypeName" />
+        <id column="eqpmtn_item_nullable_sign" property="eqpmtnItemNullableSign" />
+        <id column="eqpmtn_item_default" property="eqpmtnItemDefault" />
+        <id column="eqpmtn_item_stdrd" property="eqpmtnItemStdrd" />
+        <result column="eqpmtn_item_name" property="eqpmtnItemName" />
+        <result column="eqpmtn_item_optn" property="eqpmtnItemOptn" />
+        <result column="last_modifier_id" property="lastModifierId" />
+        <result column="last_modifier" property="lastModifier" />
+        <result column="last_updatetime" property="lastUpdatetime" />
+        <result column="use_sign" property="useSign" />
+        <result column="eqpmtn_item_optn_1" property="eqpmtnItemOptn1" />
+        <result column="eqpmtn_item_default_1" property="eqpmtnItemDefault1" />
+    </resultMap>
+
+</mapper>

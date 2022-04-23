@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lis.BaseModel.mapper.CallWindowMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.lis.BaseModel.entity.CallWindow">
+        <id column="call_window_id" property="callWindowId" />
+        <id column="call_window_name" property="callWindowName" />
+        <id column="window_ip" property="windowIp" />
+        <id column="window_nature" property="windowNature" />
+        <id column="display_address" property="displayAddress" />
+        <id column="remarks" property="remarks" />
+        <id column="is_stop" property="isStop" />
+        <result column="call_office_set_id" property="callOfficeSetId" />
+    </resultMap>
+
+</mapper>

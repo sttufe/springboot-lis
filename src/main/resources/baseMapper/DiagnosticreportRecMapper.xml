@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lis.BaseModel.mapper.DiagnosticreportRecMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.lis.BaseModel.entity.DiagnosticreportRec">
+        <id column="id" property="id" />
+        <id column="pat_name" property="patName" />
+        <id column="status" property="status" />
+        <id column="procedure_id" property="procedureId" />
+        <id column="issued" property="issued" />
+        <id column="type" property="type" />
+        <id column="group_id" property="groupId" />
+        <id column="uniqueid" property="uniqueid" />
+        <result column="pid" property="pid" />
+        <result column="specmids" property="specmids" />
+        <result column="ex_id_card_no" property="exIdCardNo" />
+        <result column="ex_visit_card_no" property="exVisitCardNo" />
+    </resultMap>
+
+</mapper>

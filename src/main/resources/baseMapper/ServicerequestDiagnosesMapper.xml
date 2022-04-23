@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lis.BaseModel.mapper.ServicerequestDiagnosesMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.lis.BaseModel.entity.ServicerequestDiagnoses">
+        <id column="order_id" property="orderId" />
+        <id column="labitem_code" property="labitemCode" />
+        <id column="labitem_name" property="labitemName" />
+        <id column="diagnosis_code" property="diagnosisCode" />
+        <id column="diagnosis_name" property="diagnosisName" />
+        <id column="creat_time" property="creatTime" />
+        <id column="id" property="id" />
+        <result column="labitem_id" property="labitemId" />
+        <result column="status" property="status" />
+    </resultMap>
+
+</mapper>

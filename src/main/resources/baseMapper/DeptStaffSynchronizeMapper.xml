@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lis.BaseModel.mapper.DeptStaffSynchronizeMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.lis.BaseModel.entity.DeptStaffSynchronize">
+        <id column="id" property="id" />
+        <id column="code" property="code" />
+        <id column="his_id" property="hisId" />
+        <id column="map_id" property="mapId" />
+        <id column="name" property="name" />
+        <id column="state" property="state" />
+        <id column="timestamp" property="timestamp" />
+        <id column="err_log" property="errLog" />
+        <result column="type" property="type" />
+        <result column="last_syntime" property="lastSyntime" />
+    </resultMap>
+
+</mapper>

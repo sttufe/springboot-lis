@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lis.BaseModel.mapper.TatLogRecMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.lis.BaseModel.entity.TatLogRec">
+        <id column="id" property="id" />
+        <id column="servicerequest_id" property="servicerequestId" />
+        <id column="specimen_id" property="specimenId" />
+        <id column="dispose_measure_code" property="disposeMeasureCode" />
+        <id column="specimen_bc_no" property="specimenBcNo" />
+        <id column="status" property="status" />
+        <id column="parent_specimen_id" property="parentSpecimenId" />
+        <id column="pat_name" property="patName" />
+        <result column="tat_id" property="tatId" />
+        <result column="pid" property="pid" />
+        <result column="labitem_id" property="labitemId" />
+    </resultMap>
+
+</mapper>

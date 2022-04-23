@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lis.BaseModel.mapper.CollectionTaskRecMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.lis.BaseModel.entity.CollectionTaskRec">
+        <id column="id" property="id" />
+        <id column="pat_name" property="patName" />
+        <id column="organization_id" property="organizationId" />
+        <id column="location_id" property="locationId" />
+        <id column="procedure_id" property="procedureId" />
+        <id column="ex_encounter_type" property="exEncounterType" />
+        <id column="ex_encounter_display" property="exEncounterDisplay" />
+        <id column="ex_bed_no" property="exBedNo" />
+        <result column="pid" property="pid" />
+        <result column="ex_encounter_reference1encounter" property="exEncounterReference1encounter" />
+        <result column="timestamp" property="timestamp" />
+        <result column="ex_inp_ward_id" property="exInpWardId" />
+        <result column="ex_inp_ward_name" property="exInpWardName" />
+        <result column="ex_inp_dept_id" property="exInpDeptId" />
+        <result column="ex_inp_dept_name" property="exInpDeptName" />
+        <result column="ex_outp_id" property="exOutpId" />
+        <result column="ex_outp_name" property="exOutpName" />
+        <result column="ex_encounter_reference1encounterid" property="exEncounterReference1encounterid" />
+        <result column="ex_eobject" property="exEobject" />
+        <result column="ex_etaskno" property="exEtaskno" />
+        <result column="ex_etaskname" property="exEtaskname" />
+        <result column="ex_egcode" property="exEgcode" />
+        <result column="ex_egname" property="exEgname" />
+        <result column="ex_id_card_no" property="exIdCardNo" />
+        <result column="ex_visit_card_no" property="exVisitCardNo" />
+    </resultMap>
+
+</mapper>

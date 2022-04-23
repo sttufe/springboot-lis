@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lis.BaseModel.mapper.LinstqcaccumulateavgMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.lis.BaseModel.entity.Linstqcaccumulateavg">
+        <id column="id" property="id" />
+        <id column="avg" property="avg" />
+        <id column="cv" property="cv" />
+        <id column="time" property="time" />
+        <id column="status" property="status" />
+        <id column="begtime" property="begtime" />
+        <id column="endtime" property="endtime" />
+        <id column="ave_modifier" property="aveModifier" />
+        <result column="sd" property="sd" />
+        <result column="linstqc_item_id" property="linstqcItemId" />
+        <result column="ave_modifier_id" property="aveModifierId" />
+    </resultMap>
+
+</mapper>

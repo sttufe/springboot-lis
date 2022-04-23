@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lis.BaseModel.mapper.WebMessageMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.lis.BaseModel.entity.WebMessage">
+        <id column="id" property="id" />
+        <id column="msg_type" property="msgType" />
+        <id column="msg_info" property="msgInfo" />
+        <id column="performer_id" property="performerId" />
+        <id column="performer_name" property="performerName" />
+        <id column="performer_organizetion_id" property="performerOrganizetionId" />
+        <id column="performer_organizetion_name" property="performerOrganizetionName" />
+        <id column="group_name" property="groupName" />
+        <result column="spcm_id" property="spcmId" />
+        <result column="group_id" property="groupId" />
+        <result column="other_key" property="otherKey" />
+        <result column="timestamp" property="timestamp" />
+    </resultMap>
+
+</mapper>

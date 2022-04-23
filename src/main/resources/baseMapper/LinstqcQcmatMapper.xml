@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lis.BaseModel.mapper.LinstqcQcmatMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.lis.BaseModel.entity.LinstqcQcmat">
+        <id column="qcmat_id" property="qcmatId" />
+        <id column="leve_type_name" property="leveTypeName" />
+        <id column="level_type" property="levelType" />
+        <id column="qcmat_no" property="qcmatNo" />
+        <id column="qcmat_time" property="qcmatTime" />
+        <id column="qcmat_begtime" property="qcmatBegtime" />
+        <id column="labistrmt_id" property="labistrmtId" />
+        <id column="calibrator_info" property="calibratorInfo" />
+        <result column="qcmat_name" property="qcmatName" />
+        <result column="rgnt_info" property="rgntInfo" />
+        <result column="status" property="status" />
+        <result column="labistrmt_name" property="labistrmtName" />
+        <result column="unionqcmat" property="unionqcmat" />
+        <result column="unionqcmatname" property="unionqcmatname" />
+        <result column="accessionidentifier_value" property="accessionidentifierValue" />
+        <result column="draw_color" property="drawColor" />
+    </resultMap>
+
+</mapper>

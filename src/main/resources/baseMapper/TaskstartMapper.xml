@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lis.BaseModel.mapper.TaskstartMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.lis.BaseModel.entity.Taskstart">
+        <id column="msgid" property="msgid" />
+        <id column="taskname" property="taskname" />
+        <id column="nodetime" property="nodetime" />
+        <id column="flowname" property="flowname" />
+        <id column="flowid" property="flowid" />
+        <id column="paramstr" property="paramstr" />
+        <result column="taskid" property="taskid" />
+    </resultMap>
+
+</mapper>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lis.BaseModel.mapper.InvoiceRecMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.lis.BaseModel.entity.InvoiceRec">
+        <id column="id" property="id" />
+        <id column="pat_name" property="patName" />
+        <id column="invoice_date" property="invoiceDate" />
+        <id column="invoice_no" property="invoiceNo" />
+        <id column="status" property="status" />
+        <id column="encounter_no" property="encounterNo" />
+        <id column="encounter_display" property="encounterDisplay" />
+        <id column="encounter_id" property="encounterId" />
+        <result column="pid" property="pid" />
+        <result column="encounter_type" property="encounterType" />
+        <result column="invoice_organization_id" property="invoiceOrganizationId" />
+        <result column="invoice_organization_name" property="invoiceOrganizationName" />
+        <result column="invoice_actor_id" property="invoiceActorId" />
+        <result column="invoice_actor_name" property="invoiceActorName" />
+    </resultMap>
+
+</mapper>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lis.BaseModel.mapper.TempLogMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.lis.BaseModel.entity.TempLog">
+        <id column="id" property="id" />
+        <id column="项目id" property="项目id" />
+        <id column="病人id" property="病人id" />
+        <id column="患者姓名" property="患者姓名" />
+        <id column="就诊类型" property="就诊类型" />
+        <id column="采集科室" property="采集科室" />
+        <id column="标本类型" property="标本类型" />
+        <id column="采集时机" property="采集时机" />
+        <result column="医嘱id" property="医嘱id" />
+        <result column="采集方式" property="采集方式" />
+        <result column="采集部位" property="采集部位" />
+        <result column="容器" property="容器" />
+        <result column="条码" property="条码" />
+        <result column="执行科室" property="执行科室" />
+        <result column="默认上机仪器" property="默认上机仪器" />
+    </resultMap>
+
+</mapper>
