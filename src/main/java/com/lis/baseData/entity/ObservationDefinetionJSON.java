@@ -1,7 +1,7 @@
 /**
   * Copyright 2022 bejson.com 
   */
-package com.lis.baseData.entity.ObservationDefinetionPojo;
+package com.lis.baseData.entity;
 import lombok.*;
 import org.springframework.stereotype.Component;
 

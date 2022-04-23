@@ -1,8 +1,8 @@
 package com.lis.baseData.service.imp;
 
 import com.alibaba.fastjson.JSONObject;
-import com.lis.baseData.entity.ObservationDefinetionPojo.ObservationDefinetionJSON;
-import com.lis.baseData.entity.Other.OtherObservationDefine;
+import com.lis.baseData.entity.ObservationDefinetionJSON;
+import com.lis.baseData.entity.OtherObservationDefine;
 import com.lis.baseData.mapper.Utilmapper;
 import com.lis.baseData.service.ImObserDefineOtherService;
 import com.lis.baseModel.entity.Observationdefinition;
@@ -22,11 +22,11 @@ public class ImObserDefineOtherServiceImp implements ImObserDefineOtherService {
 
 
     @Autowired
-    ObservationdefinitionService observationdefinitionService;
+    private ObservationdefinitionService observationdefinitionService;
 
 
     @Autowired
-    Utilmapper utilmapper;
+    private Utilmapper utilmapper;
 
     @Override
     public void funImport() {
@@ -38,8 +38,7 @@ public class ImObserDefineOtherServiceImp implements ImObserDefineOtherService {
 
         list=utilmapper.getOtherData();
 
-        for (OtherObservationDefine o: list
-             ) {
+        for (OtherObservationDefine o: list) {
             //ObservationDefinetion  JSON字段直接转化为对象
             ObservationDefinetionJSON observationDefinetionJSON =new ObservationDefinetionJSON();
             //写入指标定义对象
@@ -84,8 +83,6 @@ public class ImObserDefineOtherServiceImp implements ImObserDefineOtherService {
             observationdefinition.setJson(jsonObject);
 
             observationdefinitionService.save(observationdefinition);
-
-
 
 
         }

@@ -1,4 +1,4 @@
-package com.lis.baseData.entity.Other;
+package com.lis.baseData.entity;
 
 
 import lombok.*;

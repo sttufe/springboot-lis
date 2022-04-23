@@ -2,7 +2,7 @@ package com.lis.baseData.mapper;
 
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.lis.baseData.entity.Other.OtherObservationDefine;
+import com.lis.baseData.entity.OtherObservationDefine;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
