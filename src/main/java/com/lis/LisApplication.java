@@ -6,7 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
 
 
-@MapperScan(value = {"com.lis.BaseModel.mapper","com.lis.ReportForms.mapper","com.lis.API.mapper"})
+@MapperScan(value = {"com.lis.baseData.mapper","com.lis.reportSevice.mapper","com.lis.api.mapper","com.lis.baseModel.mapper"})
 @SpringBootApplication
 public class LisApplication {
 

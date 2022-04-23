@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.lis.BaseModel.mapper.LinstqcRoomLoitemMapper">
+<mapper namespace="com.lis.baseModel.mapper.LinstqcRoomLoitemMapper">
 
     <!-- 通用查询映射结果 -->
-    <resultMap id="BaseResultMap" type="com.lis.BaseModel.entity.LinstqcRoomLoitem">
+    <resultMap id="BaseResultMap" type="com.lis.baseModel.entity.LinstqcRoomLoitem">
         <id column="id" property="id" />
         <id column="obsid" property="obsid" />
         <id column="json" property="json" />

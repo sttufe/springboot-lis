@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.lis.BaseModel.mapper.MicreviewobservationMapper">
+<mapper namespace="com.lis.baseModel.mapper.MicreviewobservationMapper">
 
     <!-- 通用查询映射结果 -->
-    <resultMap id="BaseResultMap" type="com.lis.BaseModel.entity.Micreviewobservation">
+    <resultMap id="BaseResultMap" type="com.lis.baseModel.entity.Micreviewobservation">
         <id column="id" property="id" />
         <id column="observation_id" property="observationId" />
         <id column="specim_id" property="specimId" />

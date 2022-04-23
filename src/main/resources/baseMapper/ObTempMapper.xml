@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.lis.BaseModel.mapper.ObTempMapper">
+<mapper namespace="com.lis.baseModel.mapper.ObTempMapper">
 
     <!-- 通用查询映射结果 -->
-    <resultMap id="BaseResultMap" type="com.lis.BaseModel.entity.ObTemp">
+    <resultMap id="BaseResultMap" type="com.lis.baseModel.entity.ObTemp">
         <id column="编码" property="编码" />
         <result column="序号" property="序号" />
     </resultMap>

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.lis.BaseModel.mapper.AsynchronousdeliveryMapper">
+<mapper namespace="com.lis.baseModel.mapper.AsynchronousdeliveryMapper">
 
     <!-- 通用查询映射结果 -->
-    <resultMap id="BaseResultMap" type="com.lis.BaseModel.entity.Asynchronousdelivery">
+    <resultMap id="BaseResultMap" type="com.lis.baseModel.entity.Asynchronousdelivery">
         <id column="dataid" property="dataid" />
         <id column="msgidentifier" property="msgidentifier" />
         <id column="maxnum" property="maxnum" />

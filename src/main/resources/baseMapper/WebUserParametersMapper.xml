@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.lis.BaseModel.mapper.WebUserParametersMapper">
+<mapper namespace="com.lis.baseModel.mapper.WebUserParametersMapper">
 
     <!-- 通用查询映射结果 -->
-    <resultMap id="BaseResultMap" type="com.lis.BaseModel.entity.WebUserParameters">
+    <resultMap id="BaseResultMap" type="com.lis.baseModel.entity.WebUserParameters">
         <id column="id" property="id" />
         <id column="identify_str" property="identifyStr" />
         <id column="user_para_info" property="userParaInfo" />

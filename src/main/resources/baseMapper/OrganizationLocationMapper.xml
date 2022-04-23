@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.lis.BaseModel.mapper.OrganizationLocationMapper">
+<mapper namespace="com.lis.baseModel.mapper.OrganizationLocationMapper">
 
     <!-- 通用查询映射结果 -->
-    <resultMap id="BaseResultMap" type="com.lis.BaseModel.entity.OrganizationLocation">
+    <resultMap id="BaseResultMap" type="com.lis.baseModel.entity.OrganizationLocation">
         <id column="id" property="id" />
         <id column="location_id" property="locationId" />
         <id column="timestamp" property="timestamp" />
