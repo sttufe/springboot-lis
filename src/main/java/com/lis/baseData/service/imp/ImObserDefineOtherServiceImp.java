@@ -2,7 +2,6 @@ package com.lis.baseData.service.imp;
 
 import com.alibaba.fastjson.JSONObject;
 import com.lis.baseData.entity.ObservationDefinetionPojo.ObservationDefinetionJSON;
-import com.lis.baseData.entity.ObservationDefinetionPojo.QualifiedInterval;
 import com.lis.baseData.entity.Other.OtherObservationDefine;
 import com.lis.baseData.mapper.Utilmapper;
 import com.lis.baseData.service.ImObserDefineOtherService;
@@ -60,7 +59,7 @@ public class ImObserDefineOtherServiceImp implements ImObserDefineOtherService {
             observationdefinition.setObservationtype(null);
 
 
-            QualifiedInterval  qualifiedInterval=new QualifiedInterval();
+            ObservationDefinetionJSON.QualifiedInterval qualifiedInterval=new ObservationDefinetionJSON.QualifiedInterval();
             {
                 qualifiedInterval.setRange_high_code(o.get参考上限());
                 qualifiedInterval.setRange_low_value(o.get参考下限());
@@ -68,7 +67,7 @@ public class ImObserDefineOtherServiceImp implements ImObserDefineOtherService {
                 qualifiedInterval.setRange_low_unit(o.get单位());
             }
 
-            List<QualifiedInterval> listQualifiedInterval=new ArrayList<>();
+            List<ObservationDefinetionJSON.QualifiedInterval> listQualifiedInterval=new ArrayList<>();
             listQualifiedInterval.add(qualifiedInterval);
             //组合JSON
              /*id   code_coding_code   code_coding_display  preferredReportName   permittedDataType   quantitativeDetails_unit_display

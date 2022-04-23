@@ -191,7 +191,7 @@
     </dependencies>
 
     <build>
-        <finalName>springboot-lis-report</finalName>
+        <finalName>springboot-lis</finalName>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>

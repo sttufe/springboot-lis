@@ -43,6 +43,71 @@ public class ObservationDefinetionJSON {
     private boolean ex_hr;
 
 
+    @NoArgsConstructor
+    @AllArgsConstructor
+    @Getter
+    @Setter
+    @Component
+    @ToString
+    public class AppliesTo {
 
+        private String coding_code;
+        private String coding_display;
+
+
+    }
+
+    @NoArgsConstructor
+    @AllArgsConstructor
+    @Getter
+    @Setter
+    @Component
+    @ToString
+    public static class QualifiedInterval {
+
+        private String ex_devicedefinition_id;
+        private String context_coding_code;
+        private String context_coding_display;
+        private String range_high_code;
+        private String range_high_value;
+        private String range_high_unit;
+        private String range_low_code;
+        private String range_low_value;
+        private String range_low_unit;
+        private String category;
+        private String age_high_code;
+        private String age_high_value;
+        private String age_high_unit;
+        private String age_low_code;
+        private String age_low_value;
+        private String age_low_unit;
+        private List<AppliesTo> appliesTo;
+        private String gender;
+        private String gestationalAge_high_code;
+        private String gestationalAge_high_value;
+        private String gestationalAge_high_unit;
+        private String gestationalAge_low_code;
+        private String gestationalAge_low_value;
+        private String gestationalAge_low_unit;
+        private String ex_condition_code;
+        private String ex_condition_name;
+        private String ex_collection_ocas_code;
+
+    }
+
+    @NoArgsConstructor
+    @AllArgsConstructor
+    @Getter
+    @Setter
+    @Component
+    @ToString
+    public  static class ValidCodedValueSet {
+
+        private String coding_code;
+        private String coding_display;
+        private String ex_inqltctr_value;
+        private boolean ex_default_sign;
+
+    }
 
 }
