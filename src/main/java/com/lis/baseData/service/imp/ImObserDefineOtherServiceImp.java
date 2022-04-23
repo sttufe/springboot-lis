@@ -3,7 +3,7 @@ package com.lis.baseData.service.imp;
 import com.alibaba.fastjson.JSONObject;
 import com.lis.baseData.entity.ObservationDefinetionJSON;
 import com.lis.baseData.entity.OtherObservationDefine;
-import com.lis.baseData.mapper.Utilmapper;
+import com.lis.baseData.mapper.UtilsMapper;
 import com.lis.baseData.service.ImObserDefineOtherService;
 import com.lis.baseModel.entity.Observationdefinition;
 import com.lis.baseModel.service.ObservationdefinitionService;
@@ -26,7 +26,7 @@ public class ImObserDefineOtherServiceImp implements ImObserDefineOtherService {
 
 
     @Autowired
-    private Utilmapper utilmapper;
+    private UtilsMapper utilsmapper;
 
     @Override
     public void funImport() {
@@ -36,7 +36,7 @@ public class ImObserDefineOtherServiceImp implements ImObserDefineOtherService {
         //获取其它导入的指标所有数据
         List<OtherObservationDefine> list;
 
-        list=utilmapper.getOtherData();
+        list= utilsmapper.getOtherData();
 
         for (OtherObservationDefine o: list) {
             //ObservationDefinetion  JSON字段直接转化为对象
@@ -58,7 +58,8 @@ public class ImObserDefineOtherServiceImp implements ImObserDefineOtherService {
             observationdefinition.setObservationtype(null);
 
 
-            ObservationDefinetionJSON.QualifiedInterval qualifiedInterval=new ObservationDefinetionJSON.QualifiedInterval();
+
+                    ObservationDefinetionJSON.QualifiedInterval qualifiedInterval=new ObservationDefinetionJSON.QualifiedInterval();
             {
                 qualifiedInterval.setRange_high_code(o.get参考上限());
                 qualifiedInterval.setRange_low_value(o.get参考下限());

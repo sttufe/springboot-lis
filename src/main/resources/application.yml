@@ -58,4 +58,4 @@
 #   servlet:
 #     context-path: /springboot-lis
  mybatis-plus:
-   mapper-locations: classpath*:baseMapper/*.xml,classpath*:reportMapper/*.xml,classpath*:apiMapper/*.xml
+   mapper-locations: classpath*:baseMapper/*.xml,classpath*:mapper/*.xml

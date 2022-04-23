@@ -2,6 +2,7 @@ package com.lis.reportSevice.services.imp;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.lis.baseData.mapper.UtilsMapper;
 import com.lis.baseModel.entity.Observation;
 import com.lis.baseModel.entity.ObservationRec;
 import com.lis.baseModel.entity.Observationdefinition;
@@ -9,7 +10,7 @@ import com.lis.baseModel.service.ObservationRecService;
 import com.lis.baseModel.service.ObservationService;
 import com.lis.baseModel.service.ObservationdefinitionService;
 import com.lis.baseModel.service.SpecimenRecService;
-import com.lis.reportSevice.mapper.UtilsMapper;
+
 import com.lis.reportSevice.services.RatePositiveallService;
 import lombok.Getter;
 import lombok.Setter;

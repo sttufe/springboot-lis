@@ -4,7 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 
-import com.lis.reportSevice.mapper.UtilsMapper;
+import com.lis.baseData.mapper.UtilsMapper;
 import com.lis.reportSevice.services.ReportFromServices;
 import com.lis.baseModel.entity.Observation;
 import com.lis.baseModel.entity.ObservationRec;

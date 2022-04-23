@@ -42,14 +42,13 @@ public class ObservationDefinetionJSON {
     private String ex_note_text;
     private boolean ex_hr;
 
-
     @NoArgsConstructor
     @AllArgsConstructor
     @Getter
     @Setter
     @Component
     @ToString
-    public class AppliesTo {
+   public static class AppliesTo {
 
         private String coding_code;
         private String coding_display;
@@ -63,7 +62,7 @@ public class ObservationDefinetionJSON {
     @Setter
     @Component
     @ToString
-    public static class QualifiedInterval {
+  public static class QualifiedInterval {
 
         private String ex_devicedefinition_id;
         private String context_coding_code;
@@ -101,13 +100,14 @@ public class ObservationDefinetionJSON {
     @Setter
     @Component
     @ToString
-    public  static class ValidCodedValueSet {
+ public  static   class ValidCodedValueSet {
 
         private String coding_code;
         private String coding_display;
         private String ex_inqltctr_value;
         private boolean ex_default_sign;
-
     }
 
+
 }
+
