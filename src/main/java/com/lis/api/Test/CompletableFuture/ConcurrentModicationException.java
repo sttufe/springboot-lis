@@ -1,4 +1,4 @@
-package com.lis.api.Test;
+package com.lis.api.Test.CompletableFuture;
 
 import java.util.ArrayList;
 import java.util.Iterator;

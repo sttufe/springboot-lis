@@ -1,6 +1,5 @@
 package com.lis.baseData.mapper;
 
-
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.lis.baseData.entity.OtherObservationDefine;
 import com.lis.baseModel.entity.ObservationRec;

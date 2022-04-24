@@ -18,7 +18,6 @@
     type: com.alibaba.druid.pool.DruidDataSource
 
 
-
     #Druid 数据源属性配置 （需要创建数据源配置类，进行配置才会生效）
     initialSize: 5
     minIdle: 5

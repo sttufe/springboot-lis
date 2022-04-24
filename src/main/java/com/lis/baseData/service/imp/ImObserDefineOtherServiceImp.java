@@ -19,12 +19,8 @@ import java.util.UUID;
 
 @Service
 public class ImObserDefineOtherServiceImp implements ImObserDefineOtherService {
-
-
     @Autowired
     private ObservationdefinitionService observationdefinitionService;
-
-
     @Autowired
     private UtilsMapper utilsmapper;
 
@@ -51,15 +47,11 @@ public class ImObserDefineOtherServiceImp implements ImObserDefineOtherService {
 
             observationdefinition.setStatus("active");
 
-
             observationdefinition.setTimestamp( new Timestamp(new Date().getTime()));
-
 
             observationdefinition.setObservationtype(null);
 
-
-
-                    ObservationDefinetionJSON.QualifiedInterval qualifiedInterval=new ObservationDefinetionJSON.QualifiedInterval();
+            ObservationDefinetionJSON.QualifiedInterval qualifiedInterval=new ObservationDefinetionJSON.QualifiedInterval();
             {
                 qualifiedInterval.setRange_high_code(o.get参考上限());
                 qualifiedInterval.setRange_low_value(o.get参考下限());
@@ -84,7 +76,6 @@ public class ImObserDefineOtherServiceImp implements ImObserDefineOtherService {
             observationdefinition.setJson(jsonObject);
 
             observationdefinitionService.save(observationdefinition);
-
 
         }
         System.out.println(list.size());

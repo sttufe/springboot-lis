@@ -11,8 +11,10 @@ import java.util.concurrent.ExecutionException;
 
 @Service
 public interface RatePositiveallService {
-    JSONArray AsynRatePositiveAll(Timestamp BeginTimestamp , Timestamp EndTimestamp) throws ExecutionException, InterruptedException, IOException;
+    JSONArray AsynRatePositiveAll(Timestamp BeginTimestamp , Timestamp EndTimestamp)
+            throws ExecutionException, InterruptedException, IOException;
 
-    JSONArray EncounterAsynReport(Timestamp BeginTimestamp , Timestamp EndTimestamp) throws ExecutionException, InterruptedException, IOException;
+    JSONArray EncounterAsynReport(Timestamp BeginTimestamp , Timestamp EndTimestamp)
+            throws ExecutionException, InterruptedException, IOException;
 
 }

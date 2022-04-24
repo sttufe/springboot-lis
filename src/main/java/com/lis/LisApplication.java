@@ -3,10 +3,10 @@ package com.lis;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.ComponentScan;
 
 
-@MapperScan(value = {"com.lis.baseData.mapper","com.lis.reportSevice.mapper","com.lis.api.mapper","com.lis.baseModel.mapper"})
+@MapperScan(value = {"com.lis.baseData.mapper","com.lis.reportSevice.mapper","com.lis.api.mapper",
+        "com.lis.baseModel.mapper"})
 @SpringBootApplication
 public class LisApplication {
 

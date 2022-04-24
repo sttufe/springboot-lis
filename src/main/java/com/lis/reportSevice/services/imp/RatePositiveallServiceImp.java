@@ -85,7 +85,7 @@ public class RatePositiveallServiceImp implements RatePositiveallService {
 
 
     //跳出子线程的数-------------------------------要在方法之前提前获取
-//    public  CountDownLatch latch = new CountDownLatch(21742);
+    //public  CountDownLatch latch = new CountDownLatch(21742);
 
 
     @Override
