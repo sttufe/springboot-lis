@@ -26,10 +26,7 @@ public class Thread17_AllOf {
         Stream<CompletableFuture<String>> completableFutureStream = taskList.stream()
                 .map(num -> {
                             return CompletableFuture
-                                    .supplyAsync(() -> {
-                                                return getDouble(num);
-                                            },
-                                            executor)
+                                    .supplyAsync(() -> getDouble(num), executor)
                                     .handle((s, throwable) -> {
 
                                         if (throwable == null) {
@@ -44,7 +41,7 @@ public class Thread17_AllOf {
                         }
                 );
 
-        CompletableFuture[] completableFutures = completableFutureStream.toArray(CompletableFuture[]::new);
+        CompletableFuture[] completableFutures = completableFutureStream.toArray(  CompletableFuture[]::new);
 
         CompletableFuture.allOf(completableFutures)
                 .whenComplete((v, th) -> {

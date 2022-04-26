@@ -72,6 +72,9 @@ public class ImObserDefineOtherServiceImp implements ImObserDefineOtherService {
             //写入范围
             observationDefinetionJSON.setQualifiedInterval(listQualifiedInterval);
 
+            observationDefinetionJSON.setEx_active(true);
+            observationDefinetionJSON.setCode_coding_display(o.get项目名称());
+
             JSONObject jsonObject= (JSONObject) JSONObject.toJSON(observationDefinetionJSON);
             observationdefinition.setJson(jsonObject);
 

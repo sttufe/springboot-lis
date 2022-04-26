@@ -55,6 +55,6 @@
  server:
    port: 8088
 #   servlet:
-#     context-path: /springboot-lis
+#     context-path:  /springboot-lis
  mybatis-plus:
    mapper-locations: classpath*:baseMapper/*.xml,classpath*:mapper/*.xml
