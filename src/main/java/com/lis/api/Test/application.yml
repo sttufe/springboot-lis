@@ -1,10 +1,9 @@
 spring:
-  filters: stat,log4j,config
-  config:
-    location:
-  main:
-    allow-circular-references: true
-
+    filters: stat,log4j,config
+#   config:
+#    location: D:/config/application.yml
+    main:
+       allow-circular-references: true
 
 
 
@@ -55,9 +54,9 @@ spring:
   mvc:
     pathmatch:
       matching-strategy: ant_path_matcher
-server:
-  port: 8099
-  servlet:
-    context-path:  /spring
-mybatis-plus:
-  mapper-locations: classpath*:baseMapper/*.xml,classpath*:mapper/*.xml
+ server:
+   port: 8088
+   servlet:
+     context-path:  /springboot-lis
+ mybatis-plus:
+   mapper-locations: classpath*:baseMapper/*.xml,classpath*:mapper/*.xml

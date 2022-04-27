@@ -74,9 +74,12 @@ public class ImObserDefineOtherServiceImp implements ImObserDefineOtherService {
 
             observationDefinetionJSON.setEx_active(true);
             observationDefinetionJSON.setCode_coding_display(o.get项目名称());
-
             JSONObject jsonObject= (JSONObject) JSONObject.toJSON(observationDefinetionJSON);
+            //解决部分空值问题 再转一次
+            jsonObject= JSONObject.parseObject(jsonObject.toString());
+
             observationdefinition.setJson(jsonObject);
+
 
             observationdefinitionService.save(observationdefinition);
 
