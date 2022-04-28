@@ -22,7 +22,6 @@ public class AsynchronousdeliveryController {
     @RequestMapping("/test")
     String test(){
 
-
         int a=100;
         int b=33;
         double f1 = new BigDecimal((float)b/a).setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();

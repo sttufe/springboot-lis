@@ -1,7 +1,5 @@
 spring:
   filters: stat,log4j,config
-  config:
-    location:
   main:
     allow-circular-references: true
 
@@ -14,9 +12,9 @@ spring:
     #mysql的连接信息
     url: jdbc:postgresql://127.0.0.1:5432/weblis?currentSchema=public&stringtype=unspecified
     #用户名
-    username: postgres
+    username: ENC(gGNKhubrYMYMgwMFu6VbrdDnwOE2foim)
     #密码
-    password: postgres
+    password: ENC(PrZm5XXLje0/tcRdBa/2qJsKvIUyKwiI)
     # Type 设置使用何种类型的数据源
     type: com.alibaba.druid.pool.DruidDataSource
 
@@ -61,3 +59,12 @@ server:
     context-path:  /spring
 mybatis-plus:
   mapper-locations: classpath*:baseMapper/*.xml,classpath*:mapper/*.xml
+
+
+
+# 加密所需的密钥
+jasypt:
+  encryptor:
+    password: Bt%XJ^n1j8mz
+    # 默认加密方式PBEWithMD5AndDES,可以更改为PBEWithMD5AndTripleDES
+    algorithm: PBEWithMD5AndDES
