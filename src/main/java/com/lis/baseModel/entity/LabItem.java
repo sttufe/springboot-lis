@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -45,13 +46,13 @@ public class LabItem implements Serializable {
     private String status;
 
     @TableField("timestamp")
-    private LocalDateTime timestamp;
+    private Timestamp timestamp;
 
     @TableField("hisid")
     private String hisid;
 
     @TableField("ex_hideItem")
-    private Boolean exHideitem;
+    private Boolean exHideItem;
 
     @ApiModelProperty("英文缩写")
     @TableField("ex_abbreviation_display")

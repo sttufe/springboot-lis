@@ -16,7 +16,14 @@ public class ImpWithOtherController {
 
     @RequestMapping("/impobsDefine")
     public String ImpObservationDefinetion(){
-        imObserDefineOtherService.funImport();
-        return "apifox";
+        imObserDefineOtherService.ImportObservatin();
+        return "ok";
+    }
+
+
+    @RequestMapping("/LabitemCompareObservation")
+    public String LabitemCompareObservation(){
+        imObserDefineOtherService.LabitemCompareObservation();
+        return "ok";
     }
 }

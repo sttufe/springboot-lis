@@ -13,7 +13,7 @@
         <id column="hisid" property="hisid" />
         <id column="ex_abbreviation_display" property="exAbbreviationDisplay" />
         <result column="code" property="code" />
-        <result column="ex_hideItem" property="exHideitem" />
+        <result column="ex_hideItem" property="exHideItem" />
         <result column="ex_abbreviation_enable" property="exAbbreviationEnable" />
     </resultMap>
 

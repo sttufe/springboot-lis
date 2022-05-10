@@ -5,5 +5,6 @@ import org.springframework.stereotype.Service;
 
 @Service
 public interface ImObserDefineOtherService   {
-      void funImport();
+      void ImportObservatin();
+      void LabitemCompareObservation();
 }
