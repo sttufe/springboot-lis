@@ -10,8 +10,9 @@ import org.springframework.stereotype.Component;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Result {
-    int code;
-    String token;
-    String message;
+public class SelfToken extends  PublicResult{
+
+   private String token;
+
 }
+

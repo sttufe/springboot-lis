@@ -10,18 +10,14 @@ import java.util.List;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class RouteResult{
+public class Route extends PublicResult{
 
-    private int code;
     private List<Data> data;
-    private String message;
-
-
     @Getter
     @Setter
     @AllArgsConstructor
     @NoArgsConstructor
-    class Data {
+   public static class Data {
         private int id;
         private int pid;
         private String name;
@@ -30,27 +26,8 @@ public class RouteResult{
         private String component;
         private String icon;
         private String key;
-        private List<Children> children;
+        private List<Data> children;
     }
-
-    @Getter
-    @Setter
-    @AllArgsConstructor
-    @NoArgsConstructor
-    class Children {
-
-        private int id;
-        private int pid;
-        private String name;
-        private String path;
-        private String redirect;
-        private String component;
-        private String icon;
-        private String key;
-        private List<Children> children;
-
-    }
-
 }
 
 
