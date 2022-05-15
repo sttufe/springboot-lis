@@ -1,5 +1,6 @@
 package com.lis.api.entity;
 
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -13,6 +14,5 @@ import org.springframework.stereotype.Component;
 @NoArgsConstructor
 public class LoginUser {
     private String username;
-    private String passwd;
-    private int isdelete;
+    private String password;
 }

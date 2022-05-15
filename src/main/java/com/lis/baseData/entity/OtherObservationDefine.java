@@ -29,5 +29,4 @@ public class OtherObservationDefine {
     private String 参考范围;
     private String   打印代码;
 
-
 }

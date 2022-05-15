@@ -26,8 +26,7 @@ public class Route extends PublicResult{
         private String component;
         private String icon;
         private String key;
-        private List<Data> children;
-    }
+        private List<Data> children;}
 }
 
 

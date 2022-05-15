@@ -13,6 +13,6 @@ import org.springframework.stereotype.Component;
 @AllArgsConstructor
 @NoArgsConstructor
 public class PublicResult {
-    int code;
+   private int code;
    private String message;
 }

@@ -26,6 +26,8 @@ public class AsynchronousdeliveryController {
         int b=33;
         double f1 = new BigDecimal((float)b/a).setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
 
+
+
         return f1*100+"%";
     }
 

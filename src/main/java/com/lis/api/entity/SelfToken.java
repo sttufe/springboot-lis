@@ -11,8 +11,6 @@ import org.springframework.stereotype.Component;
 @AllArgsConstructor
 @NoArgsConstructor
 public class SelfToken extends  PublicResult{
-
    private String token;
-
 }
 
