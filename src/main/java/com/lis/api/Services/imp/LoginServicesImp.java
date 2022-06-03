@@ -3,10 +3,9 @@ package com.lis.api.Services.imp;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.lis.api.Services.LoginServices;
-import com.lis.api.entity.Infos;
-import com.lis.api.entity.LoginUser;
-import com.lis.api.entity.PublicResult;
-import com.lis.api.entity.SelfToken;
+import com.lis.api.Services.MenuServices;
+import com.lis.api.entity.*;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -15,6 +14,10 @@ import java.util.List;
 
 @Service
 public class LoginServicesImp  implements LoginServices {
+
+
+    @Autowired
+    MenuServices menuServices;
 
     @Override
     public JSON login(String json) {
@@ -66,58 +69,11 @@ public class LoginServicesImp  implements LoginServices {
 
     @Override
     public JSON options() {
-        JSONObject jsonObject;
-        jsonObject= JSONObject.parseObject("{\n" +
-                "  \"code\": 200,\n" +
-                "  \"data\": {\n" +
-                "    \"industry\": [\n" +
-                "      {\n" +
-                "        \"label\": \"儿童服装\",\n" +
-                "        \"value\": 1\n" +
-                "      },\n" +
-                "      {\n" +
-                "        \"label\": \"风险投资\",\n" +
-                "        \"value\": 2\n" +
-                "      },\n" +
-                "      {\n" +
-                "        \"label\": \"资本投资\",\n" +
-                "        \"value\": 3\n" +
-                "      },\n" +
-                "      {\n" +
-                "        \"label\": \"房地产\",\n" +
-                "        \"value\": 4\n" +
-                "      },\n" +
-                "      {\n" +
-                "        \"label\": \"军工产品\",\n" +
-                "        \"value\": 5\n" +
-                "      }\n" +
-                "    ],\n" +
-                "    \"cat\": [\n" +
-                "      {\n" +
-                "        \"label\": \"奥迪\",\n" +
-                "        \"value\": \"aodi\"\n" +
-                "      },\n" +
-                "      {\n" +
-                "        \"label\": \"宝马\",\n" +
-                "        \"value\": \"baoma\"\n" +
-                "      },\n" +
-                "      {\n" +
-                "        \"label\": \"沃尔沃\",\n" +
-                "        \"value\": \"oero\"\n" +
-                "      },\n" +
-                "      {\n" +
-                "        \"label\": \"丰田\",\n" +
-                "        \"value\": \"fengt\"\n" +
-                "      },\n" +
-                "      {\n" +
-                "        \"label\": \"本田\",\n" +
-                "        \"value\": \"bent\"\n" +
-                "      }\n" +
-                "    ]\n" +
-                "  },\n" +
-                "  \"message\": \"编辑成功\"\n" +
-                "}");
-        return  jsonObject;
+        Menu menu;
+        Route route;
+        menu= menuServices.getById(0);
+        route= JSONObject.toJavaObject(JSONObject.parseObject(menu.getJson()),Route.class);
+        return  (JSON)JSONObject.toJSON(route);
     }
 
     @Override
@@ -184,103 +140,10 @@ public class LoginServicesImp  implements LoginServices {
 
     @Override
     public JSON getMenu() {
-        JSONObject jsonObject;
-
-        jsonObject=  JSONObject.parseObject("{\n" +
-                "  \"code\": 200,\n" +
-                "  \"data\": [\n" +
-                "    {\n" +
-                "      \"id\": 1,\n" +
-                "      \"pid\": 0,\n" +
-                "      \"name\": \"基础模板\",\n" +
-                "      \"path\": \"/\",\n" +
-                "      \"redirect\": \"/element/icon\",\n" +
-                "      \"component\": \"BasicLayout\",\n" +
-                "      \"icon\": \"AppleOutlined\",\n" +
-                "      \"key\": \"layout\",\n" +
-                "      \"children\": [\n" +
-                "        {\n" +
-                "          \"id\": 2,\n" +
-                "          \"pid\": 1,\n" +
-                "          \"name\": \"好用组件\",\n" +
-                "          \"path\": \"/element\",\n" +
-                "          \"redirect\": \"/element/icon\",\n" +
-                "          \"component\": \"RouteView\",\n" +
-                "          \"icon\": \"ChromeOutlined\",\n" +
-                "          \"key\": \"element\",\n" +
-                "          \"children\": [\n" +
-                "            {\n" +
-                "              \"id\": 10,\n" +
-                "              \"pid\": 2,\n" +
-                "              \"name\": \"图标组件\",\n" +
-                "              \"path\": \"/element/icon\",\n" +
-                "              \"redirect\": \"\",\n" +
-                "              \"component\": \"/element/icon\",\n" +
-                "              \"icon\": \"\",\n" +
-                "              \"key\": \"el_icon\",\n" +
-                "              \"keepAlive\": true\n" +
-                "            },\n" +
-                "            {\n" +
-                "              \"id\": 11,\n" +
-                "              \"pid\": 2,\n" +
-                "              \"name\": \"表格组件\",\n" +
-                "              \"path\": \"/element/table\",\n" +
-                "              \"redirect\": \"\",\n" +
-                "              \"component\": \"/element/table\",\n" +
-                "              \"icon\": \"\",\n" +
-                "              \"key\": \"el_table\"\n" +
-                "            },\n" +
-                "            {\n" +
-                "              \"id\": 12,\n" +
-                "              \"pid\": 2,\n" +
-                "              \"name\": \"详情\",\n" +
-                "              \"path\": \"/element/detail\",\n" +
-                "              \"redirect\": \"\",\n" +
-                "              \"component\": \"/element/detail\",\n" +
-                "              \"icon\": \"\",\n" +
-                "              \"key\": \"detail\",\n" +
-                "              \"hidden\": true\n" +
-                "            }\n" +
-                "          ]\n" +
-                "        },\n" +
-                "        {\n" +
-                "          \"id\": 3,\n" +
-                "          \"pid\": 1,\n" +
-                "          \"name\": \"合作打赏\",\n" +
-                "          \"path\": \"/team\",\n" +
-                "          \"redirect\": \"/team/optionc\",\n" +
-                "          \"component\": \"RouteView\",\n" +
-                "          \"icon\": \"WechatOutlined\",\n" +
-                "          \"key\": \"team\",\n" +
-                "          \"children\": [\n" +
-                "            {\n" +
-                "              \"id\": 12,\n" +
-                "              \"pid\": 3,\n" +
-                "              \"name\": \"加入维护\",\n" +
-                "              \"path\": \"/team/join\",\n" +
-                "              \"redirect\": \"\",\n" +
-                "              \"component\": \"/team/join\",\n" +
-                "              \"icon\": \"\",\n" +
-                "              \"key\": \"join\"\n" +
-                "            },\n" +
-                "            {\n" +
-                "              \"id\": 13,\n" +
-                "              \"pid\": 3,\n" +
-                "              \"name\": \"赞助支持\",\n" +
-                "              \"path\": \"/team/sponsor\",\n" +
-                "              \"redirect\": \"\",\n" +
-                "              \"component\": \"/team/sponsor\",\n" +
-                "              \"icon\": \"\",\n" +
-                "              \"key\": \"sponsor\"\n" +
-                "            }\n" +
-                "          ]\n" +
-                "        }\n" +
-                "      ]\n" +
-                "    }\n" +
-                "  ],\n" +
-                "  \"message\": \"信息返回成功\"\n" +
-                "}");
-
-        return jsonObject;
+        Menu menu;
+        Route route;
+        menu= menuServices.getById(0);
+        route= JSONObject.toJavaObject(JSONObject.parseObject(menu.getJson()),Route.class);
+        return  (JSON)JSONObject.toJSON(route);
     }
 }
