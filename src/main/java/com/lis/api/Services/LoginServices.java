@@ -6,12 +6,12 @@ import org.springframework.stereotype.Service;
 @Service
 public interface LoginServices {
 
-    JSON login(String json);
-    JSON logout();
-    JSON getInfo();
-    JSON getMenu();
-    JSON options();
-    JSON table();
+    String login(String json);
+    String logout();
+    String getInfo();
+    String getMenu();
+    String options();
+    String table();
 
 
 }

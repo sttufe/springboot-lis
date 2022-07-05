@@ -5,6 +5,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.lis.api.Services.LoginServices;
 import com.lis.api.Services.MenuServices;
 import com.lis.api.entity.*;
+import lombok.extern.java.Log;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,12 +21,12 @@ public class LoginServicesImp  implements LoginServices {
     MenuServices menuServices;
 
     @Override
-    public JSON login(String json) {
+    public String login(String json) {
         LoginUser loginUser;
         SelfToken selfToken=new SelfToken();
         loginUser= JSONObject.toJavaObject(JSONObject.parseObject(json),LoginUser.class);
         int status=0;
-        if (loginUser.getUsername().equals("admin")&&loginUser.getPassword().equals("123456")){
+        if (loginUser.getUsername().equals("admin")&&loginUser.getPassword().equals("1")){
             selfToken.setCode(200);
             selfToken.setMessage("登陆成功！");
             selfToken.setToken("Token123456");
@@ -37,25 +38,25 @@ public class LoginServicesImp  implements LoginServices {
         System.out.println("username:"+loginUser.getUsername());
         System.out.println("password:"+loginUser.getPassword());
 
-        return  (JSON)JSONObject.toJSON(selfToken);}
+        return JSONObject.toJSON(selfToken).toString();}
 
     @Override
-    public JSON logout() {
+    public String logout() {
         PublicResult publicResult=new PublicResult();
         publicResult.setCode(200);
         publicResult.setMessage("退出成功！");
-        return (JSON)JSONObject.toJSON(publicResult);
+        return JSONObject.toJSON(publicResult).toString();
     }
 
     @Override
-    public JSON getInfo() {
+    public String getInfo() {
         Infos infos=new Infos();
         infos.setCode(200);
         infos.setMessage("信息返回成功！");
 
 
         Infos.Info info=new Infos.Info();
-        info.setName("请相信光");
+        info.setName("不要相信光");
         info.setAvatar("https://img2.baidu.com/it/u=1342701199,2079596281&fm=26&fmt=auto&gp=0.jpg");
         List<String> list=new ArrayList<>();
         list.add("admin");
@@ -63,21 +64,21 @@ public class LoginServicesImp  implements LoginServices {
         info.setToken("Token123456");
         infos.setInfo(info);
 
-        return (JSON)JSONObject.toJSON(infos);
+        return  JSONObject.toJSON(infos).toString();
     }
 
 
     @Override
-    public JSON options() {
+    public String options() {
         Menu menu;
         Route route;
         menu= menuServices.getById(0);
         route= JSONObject.toJavaObject(JSONObject.parseObject(menu.getJson()),Route.class);
-        return  (JSON)JSONObject.toJSON(route);
+        return  JSONObject.toJSON(route).toString();
     }
 
     @Override
-    public JSON table() {
+    public String table() {
         JSONObject jsonObject;
         jsonObject =JSONObject.parseObject("{\n" +
                 "  \"code\": 200,\n" +
@@ -133,17 +134,18 @@ public class LoginServicesImp  implements LoginServices {
                 "    }\n" +
                 "  ]\n" +
                 "}");
-        return  jsonObject;
+        return  jsonObject.toString();
     }
 
 
 
     @Override
-    public JSON getMenu() {
+    public String getMenu() {
         Menu menu;
         Route route;
         menu= menuServices.getById(0);
         route= JSONObject.toJavaObject(JSONObject.parseObject(menu.getJson()),Route.class);
-        return  (JSON)JSONObject.toJSON(route);
+        System.out.println(route.toString());
+        return  JSONObject.toJSON(route).toString();
     }
 }

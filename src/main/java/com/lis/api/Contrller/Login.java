@@ -1,6 +1,6 @@
 package com.lis.api.Contrller;
 
-import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.lis.api.Services.LoginServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -12,40 +12,50 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/")
-public class Login {
+public  class Login {
     @Autowired
     LoginServices loginServices;
 
+    public String logs;
 
     @RequestMapping("/login")
-    public JSON login(@RequestBody String json){
+    public String login(@RequestBody String json){
         return  loginServices.login(json);};
 
 
     @RequestMapping("/logout")
-    public JSON logout(){
+    public String logout(){
       return loginServices.logout();}
 
 
     @RequestMapping("/info")
-    public JSON info(){
+    public String info(){
        return loginServices.getInfo();}
 
 
 
     @RequestMapping("/table/options")
-    public JSON options(){
+    public String options(){
         return loginServices.options();}
 
     @RequestMapping("/table")
-    public JSON table(@RequestParam(value = "age", required = false, defaultValue = "") Integer age,
+    public String table(@RequestParam(value = "age", required = false, defaultValue = "") Integer age,
                       @RequestParam(value = "current", required = false, defaultValue = "") Integer current,
                       @RequestParam(value = "pageSize", required = false, defaultValue = "") Integer pageSize){
         return  loginServices.table();}
 
 
     @RequestMapping("/menu")
-    public JSON getMenu(){
+    public String getMenu(){
         return  loginServices.getMenu();}
+
+
+
+    @RequestMapping("/logs")
+    public String log(){
+
+        System.out.println("logs");
+        return new JSONObject().toString();}
+
 
 }

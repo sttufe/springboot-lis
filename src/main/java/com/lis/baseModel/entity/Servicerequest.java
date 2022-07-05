@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import io.swagger.annotations.ApiModel;
 import lombok.Getter;
@@ -32,7 +33,7 @@ public class Servicerequest implements Serializable {
     private String status;
 
     @TableField("timestamp")
-    private LocalDateTime timestamp;
+    private Timestamp timestamp;
 
     @TableField("json")
     private String json;

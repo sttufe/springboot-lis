@@ -5,11 +5,13 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 /**
  * <p>
@@ -23,6 +25,7 @@ import lombok.Setter;
 @Setter
 @TableName("servicerequest_rec")
 @ApiModel(value = "ServicerequestRec对象", description = "检验申请记录")
+@ToString
 public class ServicerequestRec implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -46,7 +49,7 @@ public class ServicerequestRec implements Serializable {
     private String servicerequestCode;
 
     @TableField("servicerequest_authoredon")
-    private LocalDateTime servicerequestAuthoredon;
+    private Timestamp servicerequestAuthoredon;
 
     @TableField("pat_infctdz_sign")
     private String patInfctdzSign;
