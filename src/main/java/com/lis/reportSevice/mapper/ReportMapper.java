@@ -1,6 +1,7 @@
 package com.lis.reportSevice.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.lis.baseModel.entity.Servicerequest;
 import com.lis.baseModel.entity.ServicerequestRec;
 import com.lis.baseModel.entity.Specimen;
 import com.lis.baseModel.entity.SpecimenRec;
@@ -8,7 +9,6 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
-import java.sql.Timestamp;
 import java.util.List;
 import java.util.Set;
 
@@ -32,8 +32,7 @@ public interface ReportMapper extends BaseMapper<Object> {
     ServicerequestRec getSpecimen(@Param("id") String id);
 
 
-    @Select("select id from specimen_rec sr  where sr.pat_name <>'无主标本'  and  sr.coll_time>\'${b_data}\' and   sr.coll_time<\'${e_data}\'")
-    List<Integer> getSpecimenRec(@Param("b_data") String b_data, @Param("e_data") String e_data);
+
 
     @Select("select id from observation_rec or2  where \"specimen_reference1Specimen\" =\'${specimen_id}\'")
     Set<Integer> getObservationRecIds(@Param("specimen_id") Integer specimen_id);
@@ -44,4 +43,23 @@ public interface ReportMapper extends BaseMapper<Object> {
             "ex_egname,ex_etaskno,ex_etaskname,ex_id_card_no,ex_visit_card_no,duplex_identification,unitcode,unitname FROM specimen_rec " +
             "WHERE id=\'${id}\'")
     SpecimenRec getSpecimenRecById(@Param( "id")Integer id);
+
+
+ /**
+  * 重载 可以加条件  COndition 用 and 开头 后跟条件
+  * @param b_data
+  * @param e_data
+  * @param SQLCondition
+  * @return
+  */
+ @Select("select id from specimen_rec sr  where sr.pat_name <>'无主标本'  and  sr.coll_time>\'${b_data}\' and   sr.coll_time<\'${e_data}\'     ${SQLCondition}")
+ List<Integer> getSpecimenRec(@Param("b_data") String b_data,
+                              @Param("e_data") String e_data,
+                              @Param("SQLCondition") String SQLCondition);
+
+
+ @Select("select * from servicerequest s where   status = \'active\' and   \"timestamp\"  between   \'${b_data}\'  and  \'${e_data}\'       ${SQLCondition}")
+ List<Servicerequest> getServicerequests(@Param("b_data") String b_data,
+                                         @Param("e_data") String e_data,
+                                         @Param("SQLCondition") String SQLCondition);
 }

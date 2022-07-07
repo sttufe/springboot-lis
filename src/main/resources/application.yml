@@ -10,7 +10,7 @@ spring:
     #mysql的配置加载驱动类信息
     driver-class-name:  org.postgresql.Driver
     #mysql的连接信息
-    url: jdbc:postgresql://10.92.170.107:5432/weblis_test?currentSchema=public&stringtype=unspecified
+    url: jdbc:postgresql://127.0.0.1:5432/weblis_test?currentSchema=public&stringtype=unspecified
     #用户名
     username: ENC(gGNKhubrYMYMgwMFu6VbrdDnwOE2foim)
     #密码
@@ -65,6 +65,6 @@ mybatis-plus:
 # 加密所需的密钥
 jasypt:
   encryptor:
-    password: Bt%XJ^n1j8mz
     # 默认加密方式PBEWithMD5AndDES,可以更改为PBEWithMD5AndTripleDES
     algorithm: PBEWithMD5AndDES
+    password: Bt%XJ^n1j8mz
