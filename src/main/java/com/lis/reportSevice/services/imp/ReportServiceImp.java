@@ -10,20 +10,22 @@ import com.lis.baseModel.service.*;
 import com.lis.reportSevice.mapper.ReportMapper;
 import com.lis.reportSevice.services.ReportService;
 import lombok.*;
+import org.apache.poi.ss.formula.functions.T;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.system.ApplicationHome;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.*;
 import java.util.concurrent.*;
 import java.util.concurrent.atomic.AtomicReference;
+import java.util.function.Function;
 
 /**
  * 报表实现逻辑
  */
-@Component
+@Service
 public class ReportServiceImp  implements ReportService {
     @Autowired
     private ReportMapper reportMapper;
@@ -41,9 +43,6 @@ public class ReportServiceImp  implements ReportService {
     ApplicationHome h = new ApplicationHome(getClass());
     File JarFilePath = h.getSource();
 
-
-
-
     //线程池 500 子线程
     int nThreads=500;
     ExecutorService pool = Executors.newFixedThreadPool(nThreads);
@@ -56,14 +55,15 @@ public class ReportServiceImp  implements ReportService {
      * @return  String JsonPares
      */
     @Override
-    public String Get_HepatitisB(String b_data, String e_data,String SQLCondition,String condition) {
-
+    public String Get_HepatitisB(String b_data, String e_data,String SQLCondition,String quest_data,String condition) {
+        System.out.println(SQLCondition);
         String content="";
         long start = System.currentTimeMillis();
         content=content+("开始执行:"+ DateUtils.getCurrentYMDHMSStr()+'\n');
         content=content+("请求参数:【"+b_data+" "+e_data+"】"+'\n');
         content=content+(("线程数量："+nThreads+'\n'));
-        List<Integer> specimenRecList =reportMapper.getSpecimenRec(b_data,e_data,"");
+
+        List<Integer> specimenRecList =reportMapper.getSpecimenRec(b_data,e_data,quest_data,SQLCondition);
         content=content+(("specimenRecList："+specimenRecList.size()+'\n'));
         content=content+(("耗时【"+(System.currentTimeMillis()-start)+"】ms"+'\n'));
 
@@ -104,8 +104,6 @@ public class ReportServiceImp  implements ReportService {
             );
         }
 
-
-
         //阻塞 等待
         CompletableFuture.allOf(Specimenfutures.toArray(new CompletableFuture[0])).join();
 
@@ -144,7 +142,7 @@ public class ReportServiceImp  implements ReportService {
      * @return  JsonParse
      */
     @Override
-    public String GetPositiveOfPCR(String b_data, String e_data,String SQLCondition,String condition) throws IOException {
+    public String GetPositiveOfPCR(String b_data, String e_data,String SQLCondition,String quest_data,String condition) throws IOException {
         System.out.println(SQLCondition);
         long start = System.currentTimeMillis();
         String content="";
@@ -153,8 +151,9 @@ public class ReportServiceImp  implements ReportService {
         content=content+(("线程数量："+nThreads+'\n'));
 
         //查询优化
-        SQLCondition=getSQLCondition(b_data,e_data,SQLCondition);
-        List<Integer> specimenRecList =reportMapper.getSpecimenRec(b_data,e_data,SQLCondition);
+       // SQLCondition=getSQLCondition(b_data,e_data,SQLCondition);
+        List<Integer> specimenRecList =reportMapper.getSpecimenRec(b_data,e_data,quest_data,SQLCondition);
+        System.out.println(SQLCondition);
         content=content+(("specimenRecList："+specimenRecList.size()+'\n'));
         String[] items={"乙型肝炎DNA测定", "结核杆菌DNA测定", "淋球菌DNA核酸检测", "沙眼衣原体DNA核酸检测", "单纯疱疹病毒II型DNA核酸检测"};
         List<String> itemsList = Arrays.asList(items);
@@ -163,10 +162,13 @@ public class ReportServiceImp  implements ReportService {
         //线程安全
         Collections.synchronizedList(Specimenfutures);
         //CompletableFuture 提交任务 多线程并行处理
-        for (Integer i: specimenRecList) {
+       /* for (Integer i: specimenRecList) {
             Specimenfutures.add(CompletableFuture.supplyAsync(()-> GetReportOut(i,itemsList),pool)
             );
-        }
+        }*/
+        specimenRecList.forEach((i)->{
+            Specimenfutures.add(CompletableFuture.supplyAsync(()-> GetReportOut(i,itemsList),pool));
+        });
         //阻塞 等待
         CompletableFuture.allOf(Specimenfutures.toArray(new CompletableFuture[0])).join();
         content=content+(("计算结束-耗时-【"+(System.currentTimeMillis()-start)+"】ms"+'\n'));
@@ -209,17 +211,18 @@ public class ReportServiceImp  implements ReportService {
      * @return  JsonParse
      */
     @Override
-    public String GetObstetricsItem(String b_data, String e_data,String SQLCondition,String condition) throws IOException {
+    public String GetObstetricsItem(String b_data, String e_data,String SQLCondition,String quest_data,String condition) throws IOException {
         String content="";
         long start = System.currentTimeMillis();
         content=content+("开始执行:"+ DateUtils.getCurrentYMDHMSStr()+'\n');
         content=content+("请求参数:【"+b_data+" "+e_data+"】"+'\n');
         content=content+(("线程数量："+nThreads+'\n'));
-        List<Integer> specimenRecList =reportMapper.getSpecimenRec(b_data,e_data,"");
+        List<Integer> specimenRecList =reportMapper.getSpecimenRec(b_data,e_data,quest_data,SQLCondition);
         content=content+(("specimenRecList："+specimenRecList.size()+'\n'));
         content=content+(("耗时【"+(System.currentTimeMillis()-start)+"】ms"+'\n'));
 
-        String[] items=  condition.split(",");
+       // String[] items=  condition.split(",");
+        String[] items={"艾乙梅(金标定性)(产免1)", "地中海贫血基因诊断"};
         List<String> itemsList = Arrays.asList(items);
 
         //任务队列
@@ -245,7 +248,6 @@ public class ReportServiceImp  implements ReportService {
                     for (ReportOut ro: s) {
                         jsonArray.add(JSONObject.toJSON(ro)) ;
                     }
-                    //System.out.println(s.size());  System.out.println(s.get(0).toString());
                 }
             } catch (InterruptedException | ExecutionException e) {
                 e.printStackTrace();
@@ -271,19 +273,21 @@ public class ReportServiceImp  implements ReportService {
      * @return  String
      */
     @Override
-    public String getInfectiousDiseases(String b_data, String e_data, String SQLCondition, String condition) throws IOException {
+    public String getInfectiousDiseases(String b_data, String e_data, String SQLCondition, String condition,String quest_data) throws IOException {
         long start = System.currentTimeMillis();
         String content="";
         content=content+("开始执行:"+ DateUtils.getCurrentYMDHMSStr()+'\n');
         content=content+("请求参数:【"+b_data+" "+e_data+"】"+'\n');
         content=content+(("线程数量："+nThreads+'\n'));
 
-        //查询优化
-        SQLCondition=getSQLCondition(b_data,e_data,SQLCondition);
-        List<Integer> specimenRecList =reportMapper.getSpecimenRec(b_data,e_data,SQLCondition);
+        List<DiagnosticreportRec> diagnosticreportList =reportMapper.getDiagnosticreportRecList(b_data,e_data,quest_data,SQLCondition);
+        List<Integer> specimenRecList =reportMapper.getSpecimenRec(b_data,e_data,quest_data,SQLCondition);
 
-        String[] items=  {"乙肝两对半定量检测", "感染性标志物检测(甲、乙、丙、艾滋、梅毒疾病筛查)", "(单病种)感染性标志物检测", "乙肝两对半定量+前S1"};
+        String[] items=  {"乙肝两对半定量检测", "感染性标志物检测(甲、乙、丙、艾滋、梅毒疾病筛查)", "(单病种)感染性标志物检测", "乙肝两对半定量+前S1"
+                          ,"乙肝两对半定性","乙肝表面抗原、丙、艾(计生取环专用)"};
+        String[] ObservationItems={"HR乙型肝炎病毒e抗原", "乙型肝炎病毒核心抗体", "乙型肝炎病毒e抗体", "HR乙型肝炎病毒表面抗原"};
         List<String> itemsList = Arrays.asList(items);
+        List<String>  ObservationItemsList=Arrays.asList(ObservationItems);
         // 多线程
         List<CompletableFuture<List<ReportOut>>> Specimenfutures = new ArrayList<>();
         System.out.println(specimenRecList.size());
@@ -303,10 +307,9 @@ public class ReportServiceImp  implements ReportService {
             try {
                 List<ReportOut> s = future.get();
                 if(!s.isEmpty()) {
-                    for (ReportOut ro: s) {
-                        jsonArray.add(JSONObject.toJSON(ro)) ;
-                    }
-                    //System.out.println(s.size());  System.out.println(s.get(0).toString());
+                    //传入一个 s对象进来 把他做的乙肝相关的 项目拼接在后面返回
+                    //HR乙型肝炎病毒e抗原', '乙型肝炎病毒核心抗体', '乙型肝炎病毒e抗体', 'HR乙型肝炎病毒表面抗原
+                    jsonArray.addAll(getHR_aspartate_HRalanine(s,ObservationItemsList));
                 }
             } catch (InterruptedException | ExecutionException e) {
                 e.printStackTrace();
@@ -324,13 +327,38 @@ public class ReportServiceImp  implements ReportService {
 
 
     /**
+     * 获取 'HR天门冬氨酸氨基转移酶', 'HR丙氨酸氨基转移酶' 拼接在项目后面 没有则为空
+     * @param s  JSONArray
+     * @return
+     */
+    public  JSONArray  getHR_aspartate_HRalanine(List<ReportOut> s, List<String> observationItemsList){
+        JSONArray result=new JSONArray();
+        boolean index=false;
+        for (ReportOut ro: s) {
+             if(observationItemsList.contains(ro.getObservationName()))
+                result.add(JSONObject.toJSON(ro));
+
+              if(ro.getObservationName().equals("HR乙型肝炎病毒表面抗原"))
+              {
+                 /* if (!SelfUtil.IsNull(ro.getValue()).substring(0,1).equals(">")==true){
+                      index=true;}
+                  if (index==true&&Float.parseFloat(SelfUtil.IsNull(ro.getValue()).substring(0,ro.getValue().length()-1))>1.00){index=true;}*/
+               }
+        }
+        if(index==false){result =new JSONArray();}
+        System.out.println(result);
+        System.out.println("------------------------------------");
+        return result;
+    }
+
+    /**
      * 封装SQLCondition
      * @param b_data  开始时间
      * @param e_data  结束时间
      * @param SQLCondition  SQL条件
      * @return  String SQLCondition
      */
-    public String getSQLCondition(String b_data,String e_data,String SQLCondition){
+    public String getSQLCondition(String b_data,String e_data,String SQLCondition ){
 
         //所有申请报存
         List<Servicerequest> ServicequestList =reportMapper.getServicerequests(b_data,e_data,SQLCondition);
@@ -360,7 +388,7 @@ public class ReportServiceImp  implements ReportService {
      * @param itemsList  项目数组
      * @return  List<U> U=ReportOut
      */
-    public List<ReportOut>  GetReportOut(Integer i,List<String> itemsList){
+    public List<ReportOut>  GetReportOut(Integer i, List<String> itemsList){
         //保存映射出来的结果（observationRecIds）
          Set<Integer> observationRecIds=new HashSet<>();
 
@@ -394,7 +422,8 @@ public class ReportServiceImp  implements ReportService {
                     json = JSONObject.parseObject(s.getJson());
                     JSONObject sJson=json;
                     String coding_display = json.get("code_coding_display").toString();
-                    //保存有这些项目的申请id
+                    //申请医生
+                    String QuestDoctor=  SelfUtil.IsNull(json.get("requester_display"));
                     if (itemsList.contains(coding_display)) {
                         //"specimenId:"+specimen.getId()  observationRec 对应 Specimen 多对一
                         observationRecIds.clear();
@@ -406,6 +435,7 @@ public class ReportServiceImp  implements ReportService {
                                 //"ex_permittedDataType": "Quantity",  valueCodeableConcept_coding_display  valueQuantity_value  code_coding_code   code_coding_display
                                 JSONObject tempJson= (JSONObject) JSONObject.parse(o.getJson());
                                 ReportOut ro=new ReportOut();
+                                ro.setQuestDoctor(QuestDoctor);
                                 ro.setLabItem(SelfUtil.IsNull(sJson.get("code_coding_display")));
                                 ro.setLabItemCode(SelfUtil.IsNull(sJson.get("code_coding_code")));
                                 ro.setRequestDepartment(SelfUtil.IsNull(sJson.get("ex_organization_name")));
@@ -444,7 +474,7 @@ public class ReportServiceImp  implements ReportService {
 
 
     /**
-     * 报告返回实体类
+     * 报表返回类
      */
 @Getter
 @Setter
@@ -473,5 +503,10 @@ class  ReportOut{
     String Phone;
     //标本号
     String AccessionIdentifier_value;
+
+    //申请医生
+    String QuestDoctor;
+    //自定义条件
+    String ConditonKey;
 }}
 

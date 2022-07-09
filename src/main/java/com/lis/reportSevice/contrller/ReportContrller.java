@@ -26,10 +26,10 @@ public class ReportContrller {
     public String Get_HepatitisB(@RequestParam(value = "b_data", required = false, defaultValue = "") String b_data,
                                  @RequestParam(value = "e_data", required = false, defaultValue = "") String e_data,
                                  @RequestParam(value = "SQLCondition", required = false, defaultValue = "") String SQLCondition,
+                                 @RequestParam(value = "quest_data", required = false, defaultValue = "") String quest_data,
                                  @RequestParam(value = "condition", required = false, defaultValue = "") String condition)
     {
-
-        return reportService.Get_HepatitisB(b_data,e_data,SQLCondition,condition);
+        return reportService.Get_HepatitisB(b_data,e_data,SQLCondition, quest_data,condition);
     }
 
     /**
@@ -40,15 +40,18 @@ public class ReportContrller {
      */
     @RequestMapping("/GetPositiveOfPCR")
     public String GetPositiveOfPCR(@RequestParam(value = "b_data", defaultValue = "") String b_data,
-                                  @RequestParam(value = "e_data", defaultValue = "") String e_data,
-                                   @RequestParam(value = "SQLCondition", required = false, defaultValue = "") String SQLCondition,
-                                   @RequestParam(value = "condition", required = false, defaultValue = "") String condition) throws IOException {
+                                   @RequestParam(value = "e_data", defaultValue = "") String e_data,
+                                   @RequestParam(value = "SQLCondition") String SQLCondition,
+                                   @RequestParam(value = "quest_data", required = false, defaultValue = "") String quest_data,
 
-        return reportService.GetPositiveOfPCR(b_data,e_data,SQLCondition,condition);
+                                   @RequestParam(value = "condition", required = false) String condition) throws IOException {
+
+        return reportService.GetPositiveOfPCR(b_data,e_data,SQLCondition,quest_data,condition);
     }
 
 
     /**
+     * 艾乙梅
      * condition 为SQL 条件 and 开头 没有 默认为空
      * @param b_data
      * @param e_data
@@ -58,10 +61,11 @@ public class ReportContrller {
     @RequestMapping("/GetObstetricsItem")
     public String GetObstetricsItem(@RequestParam(value = "b_data", required = false, defaultValue = "") String b_data,
                                     @RequestParam(value = "e_data", required = false, defaultValue = "") String e_data,
-                                    @RequestParam(value = "SQLCondition", required = false, defaultValue = "") String SQLCondition,
-                                    @RequestParam(value = "condition", required = false, defaultValue = "") String condition) throws IOException {
+                                    @RequestParam(value = "SQLCondition") String SQLCondition,
+                                    @RequestParam(value = "quest_data") String quest_data,
+                                    @RequestParam(value = "condition", required = false) String condition) throws IOException {
 
-        return reportService.GetObstetricsItem(b_data,e_data,SQLCondition,condition);
+        return reportService.GetObstetricsItem(b_data,e_data,SQLCondition,quest_data,condition);
     }
 
 
@@ -76,15 +80,11 @@ public class ReportContrller {
      */
     @RequestMapping("/getInfectiousDiseases")
     public String getInfectiousDiseases(@RequestParam(value = "b_data", required = false, defaultValue = "") String b_data,
-                                    @RequestParam(value = "e_data", required = false, defaultValue = "") String e_data,
-                                    @RequestParam(value = "SQLCondition", required = false, defaultValue = "") String SQLCondition,
-                                    @RequestParam(value = "condition", required = false, defaultValue = "") String condition) throws IOException {
+                                        @RequestParam(value = "e_data", required = false, defaultValue = "") String e_data,
+                                        @RequestParam(value = "SQLCondition") String SQLCondition,
+                                        @RequestParam(value = "condition", required = false) String condition,
+                                        @RequestParam(value = "quest_data", required = false) String quest_data) throws IOException {
 
-        return reportService.getInfectiousDiseases(b_data,e_data,SQLCondition,condition);
+        return reportService.getInfectiousDiseases(b_data,e_data,SQLCondition,condition,quest_data);
     }
-
-
-
-
-
 }
