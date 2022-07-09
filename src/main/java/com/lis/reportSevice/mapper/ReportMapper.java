@@ -45,14 +45,15 @@ public interface ReportMapper extends BaseMapper<Object> {
     SpecimenRec getSpecimenRecById(@Param( "id")Integer id);
 
 
-/* *//**
-  *  可以加条件  COndition 用 and 开头 后跟条件
-  * @param b_data
-  * @param e_data
-  * @param SQLCondition
-  * @return
-  */
-@Select("select * from specimen_rec sr2  where id in (\n" +
+    /**
+     *
+     * @param b_data
+     * @param e_data
+     * @param quest_data  加上申请时间
+     * @param SQLCondition 自定义Sql 以 and 开头
+     * @return
+     */
+    @Select("select * from specimen_rec sr2  where id in (\n" +
         "select specmids::integer from diagnosticreport_rec dr   where specmids::integer in (select id  from specimen_rec sr  where sr.collection_id in (\n" +
         "select collection_id from servicerequest_collection sc  where   servicerequest_id in (\n" +
         "select id from servicerequest_rec sr  where  sr.status='active'  and  sr.servicerequest_authoredon between  \'${quest_data}\' and \'${e_data}\' ${SQLCondition} \n" +

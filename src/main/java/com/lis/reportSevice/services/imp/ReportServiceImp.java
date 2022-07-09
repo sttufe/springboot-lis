@@ -3,28 +3,27 @@ package com.lis.reportSevice.services.imp;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.lis.Utils.DateUtils;
-import com.lis.Utils.LogsUtil;
+import com.lis.Utils.FileUtils;
 import com.lis.Utils.SelfUtil;
 import com.lis.baseModel.entity.*;
 import com.lis.baseModel.service.*;
 import com.lis.reportSevice.mapper.ReportMapper;
 import com.lis.reportSevice.services.ReportService;
 import lombok.*;
-import org.apache.poi.ss.formula.functions.T;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.system.ApplicationHome;
 import org.springframework.stereotype.Service;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.*;
 import java.util.concurrent.*;
 import java.util.concurrent.atomic.AtomicReference;
-import java.util.function.Function;
 
 /**
  * 报表实现逻辑
  */
+@Slf4j
 @Service
 public class ReportServiceImp  implements ReportService {
     @Autowired
@@ -41,10 +40,10 @@ public class ReportServiceImp  implements ReportService {
 
     //jar 运行路几个
     ApplicationHome h = new ApplicationHome(getClass());
-    File JarFilePath = h.getSource();
+    java.io.File JarFilePath = h.getSource();
 
     //线程池 500 子线程
-    int nThreads=500;
+    int nThreads=100;
     ExecutorService pool = Executors.newFixedThreadPool(nThreads);
 
     /**
@@ -56,17 +55,17 @@ public class ReportServiceImp  implements ReportService {
      */
     @Override
     public String Get_HepatitisB(String b_data, String e_data,String SQLCondition,String quest_data,String condition) {
-        System.out.println(SQLCondition);
-        String content="";
-        long start = System.currentTimeMillis();
-        content=content+("开始执行:"+ DateUtils.getCurrentYMDHMSStr()+'\n');
-        content=content+("请求参数:【"+b_data+" "+e_data+"】"+'\n');
-        content=content+(("线程数量："+nThreads+'\n'));
+
+        long start=System.currentTimeMillis();
+
+        log.info("----------------------------------------------");
+        log.info("请求参数:【"+b_data+" "+e_data+"】");
+        log.info(("线程数量："+nThreads));
+        log.info("开始执行:"+ DateUtils.getCurrentYMDHMSStr());
 
         List<Integer> specimenRecList =reportMapper.getSpecimenRec(b_data,e_data,quest_data,SQLCondition);
-        content=content+(("specimenRecList："+specimenRecList.size()+'\n'));
-        content=content+(("耗时【"+(System.currentTimeMillis()-start)+"】ms"+'\n'));
-
+        log.info(("specimenRecList："+specimenRecList.size()));
+        log.info(("耗时【"+(System.currentTimeMillis()-start)+"】ms"));
 
         //传入参数 ',' 分割 转为list
         String[] items= {
@@ -104,34 +103,26 @@ public class ReportServiceImp  implements ReportService {
             );
         }
 
-        //阻塞 等待
+        //阻塞
         CompletableFuture.allOf(Specimenfutures.toArray(new CompletableFuture[0])).join();
 
-        content=content+(("计算结束-耗时-【"+(System.currentTimeMillis()-start)+"】ms"+'\n'));
-        JSONArray jsonArray=new JSONArray();
+        log.info(("计算结束-耗时-【"+(System.currentTimeMillis()-start)+"】ms"));
+        JSONArray ResultArray=new JSONArray();
         //获取结果
         for (CompletableFuture<List<ReportOut>> future : Specimenfutures) {
             try {
                 List<ReportOut> s = future.get();
-
                 if(!s.isEmpty()) {
-                    for (ReportOut ro: s) {
-                        jsonArray.add(JSONObject.toJSON(ro)) ;
-                    }
-
-                }
-            } catch (InterruptedException | ExecutionException e) {
-                e.printStackTrace();
-            }
+                    for (ReportOut ro: s) {ResultArray.add(JSONObject.toJSON(ro));}
+                                 }
+                } catch (InterruptedException | ExecutionException e) {e.printStackTrace();}
         }
 
-        content=content+(("返回:"+jsonArray.size()+"条记录"+'\n'));
-        content=content+(("耗时【"+(System.currentTimeMillis()-start)+"】ms"+'\n'));
-        content=content+(("程序结束:"+ DateUtils.getCurrentYMDHMSStr()+'\n'));
-        content=content+("-------------------------------------------"+'\n');
-        System.out.println(content);
-        System.out.println(JarFilePath.getParentFile().toString());
-        return  jsonArray.toString();
+        log.info(("返回:"+ResultArray.size()+"条记录"));
+        log.info(("耗时【"+(System.currentTimeMillis()-start)+"】ms"));
+        log.info(("程序结束:"+ DateUtils.getCurrentYMDHMSStr()));
+        log.info("-------------------------------------------");
+        return  ResultArray.toString();
 }
 
 
@@ -143,18 +134,18 @@ public class ReportServiceImp  implements ReportService {
      */
     @Override
     public String GetPositiveOfPCR(String b_data, String e_data,String SQLCondition,String quest_data,String condition) throws IOException {
-        System.out.println(SQLCondition);
-        long start = System.currentTimeMillis();
-        String content="";
-        content=content+("开始执行:"+ DateUtils.getCurrentYMDHMSStr()+'\n');
-        content=content+("请求参数:【"+b_data+" "+e_data+"】"+'\n');
-        content=content+(("线程数量："+nThreads+'\n'));
+        long start=System.currentTimeMillis();
 
-        //查询优化
-       // SQLCondition=getSQLCondition(b_data,e_data,SQLCondition);
+        log.info("----------------------------------------------");
+        log.info(getClass().toString()+"Get_HepatitisB");
+        log.info("开始执行:"+ DateUtils.getCurrentYMDHMSStr());
+        log.info("请求参数:【"+b_data+" "+e_data+"】");
+        log.info(("线程数量："+nThreads));
+        log.info("开始执行:"+ DateUtils.getCurrentYMDHMSStr());
+
         List<Integer> specimenRecList =reportMapper.getSpecimenRec(b_data,e_data,quest_data,SQLCondition);
-        System.out.println(SQLCondition);
-        content=content+(("specimenRecList："+specimenRecList.size()+'\n'));
+        log.info(("specimenRecList："+specimenRecList.size()));
+        log.info(("耗时【"+(System.currentTimeMillis()-start)+"】ms"));
         String[] items={"乙型肝炎DNA测定", "结核杆菌DNA测定", "淋球菌DNA核酸检测", "沙眼衣原体DNA核酸检测", "单纯疱疹病毒II型DNA核酸检测"};
         List<String> itemsList = Arrays.asList(items);
         //任务队列
@@ -162,18 +153,14 @@ public class ReportServiceImp  implements ReportService {
         //线程安全
         Collections.synchronizedList(Specimenfutures);
         //CompletableFuture 提交任务 多线程并行处理
-       /* for (Integer i: specimenRecList) {
-            Specimenfutures.add(CompletableFuture.supplyAsync(()-> GetReportOut(i,itemsList),pool)
-            );
-        }*/
+
         specimenRecList.forEach((i)->{
             Specimenfutures.add(CompletableFuture.supplyAsync(()-> GetReportOut(i,itemsList),pool));
         });
         //阻塞 等待
         CompletableFuture.allOf(Specimenfutures.toArray(new CompletableFuture[0])).join();
-        content=content+(("计算结束-耗时-【"+(System.currentTimeMillis()-start)+"】ms"+'\n'));
-
-        JSONArray jsonArray=new JSONArray();
+        log.info(("计算结束-耗时-【"+(System.currentTimeMillis()-start)+"】ms"));
+        JSONArray ResultArray=new JSONArray();
         //获取结果
         for (CompletableFuture<List<ReportOut>> future : Specimenfutures) {
             try {
@@ -184,21 +171,18 @@ public class ReportServiceImp  implements ReportService {
                         ){continue;}
                         if(!SelfUtil.IsNull(ro.getValue()).contains("阳")&&!(Float.parseFloat(SelfUtil.IsNull(ro.getValue()).substring(0,3))>1.00))
                          {continue;}
-                        jsonArray.add(JSONObject.toJSON(ro)) ;
+                        ResultArray.add(JSONObject.toJSON(ro)) ;
                     }
                 }
             } catch (InterruptedException | ExecutionException e) {
                 e.printStackTrace();
             }
         }
-        content=content+(("返回:"+jsonArray.size()+"条记录"+'\n'));
-        content=content+(("耗时【"+(System.currentTimeMillis()-start)+"】ms"+'\n'));
-        content=content+(("程序结束:"+ DateUtils.getCurrentYMDHMSStr()+'\n'));
-        content=content+("-------------------------------------------"+'\n');
-        System.out.println(content);
-        System.out.println(JarFilePath.getParentFile().toString());
-        LogsUtil.Save(JarFilePath.getParentFile().toString(),content);
-        return  jsonArray.toString();
+        log.info(("返回:"+ResultArray.size()+"条记录"));
+        log.info(("耗时【"+(System.currentTimeMillis()-start)+"】ms"));
+        log.info(("程序结束:"+ DateUtils.getCurrentYMDHMSStr()));
+        log.info("-------------------------------------------");
+        return  ResultArray.toString();
     }
 
 
@@ -212,14 +196,18 @@ public class ReportServiceImp  implements ReportService {
      */
     @Override
     public String GetObstetricsItem(String b_data, String e_data,String SQLCondition,String quest_data,String condition) throws IOException {
-        String content="";
-        long start = System.currentTimeMillis();
-        content=content+("开始执行:"+ DateUtils.getCurrentYMDHMSStr()+'\n');
-        content=content+("请求参数:【"+b_data+" "+e_data+"】"+'\n');
-        content=content+(("线程数量："+nThreads+'\n'));
+        long start=System.currentTimeMillis();
+
+        log.info("----------------------------------------------");
+        log.info(getClass().toString()+"Get_HepatitisB");
+        log.info("开始执行:"+ DateUtils.getCurrentYMDHMSStr());
+        log.info("请求参数:【"+b_data+" "+e_data+"】");
+        log.info(("线程数量："+nThreads));
+        log.info("开始执行:"+ DateUtils.getCurrentYMDHMSStr());
+
         List<Integer> specimenRecList =reportMapper.getSpecimenRec(b_data,e_data,quest_data,SQLCondition);
-        content=content+(("specimenRecList："+specimenRecList.size()+'\n'));
-        content=content+(("耗时【"+(System.currentTimeMillis()-start)+"】ms"+'\n'));
+        log.info(("specimenRecList："+specimenRecList.size()));
+        log.info(("耗时【"+(System.currentTimeMillis()-start)+"】ms"));
 
        // String[] items=  condition.split(",");
         String[] items={"艾乙梅(金标定性)(产免1)", "地中海贫血基因诊断"};
@@ -237,16 +225,15 @@ public class ReportServiceImp  implements ReportService {
 
         //阻塞 等待
         CompletableFuture.allOf(Specimenfutures.toArray(new CompletableFuture[0])).join();
-        content=content+(("计算结束-耗时-【"+(System.currentTimeMillis()-start)+"】ms"+'\n'));
-
-        JSONArray jsonArray=new JSONArray();
+        log.info(("计算结束-耗时-【"+(System.currentTimeMillis()-start)+"】ms"+'\n'));
+        JSONArray ResultArray=new JSONArray();
         //获取结果
         for (CompletableFuture<List<ReportOut>> future : Specimenfutures) {
             try {
                 List<ReportOut> s = future.get();
                 if(!s.isEmpty()) {
                     for (ReportOut ro: s) {
-                        jsonArray.add(JSONObject.toJSON(ro)) ;
+                        ResultArray.add(JSONObject.toJSON(ro)) ;
                     }
                 }
             } catch (InterruptedException | ExecutionException e) {
@@ -254,14 +241,11 @@ public class ReportServiceImp  implements ReportService {
             }
         }
 
-        content=content+(("返回:"+jsonArray.size()+"条记录"+'\n'));
-        content=content+(("耗时【"+(System.currentTimeMillis()-start)+"】ms"+'\n'));
-        content=content+(("程序结束:"+ DateUtils.getCurrentYMDHMSStr()+'\n'));
-        content=content+("-------------------------------------------"+'\n');
-        System.out.println(content);
-        System.out.println(JarFilePath.getParentFile().toString());
-        LogsUtil.Save(JarFilePath.getParentFile().toString(),content);
-        return  jsonArray.toString();
+        log.info(("返回:"+ResultArray.size()+"条记录"));
+        log.info(("耗时【"+(System.currentTimeMillis()-start)+"】ms"));
+        log.info(("程序结束:"+ DateUtils.getCurrentYMDHMSStr()));
+        log.info("-------------------------------------------");
+        return  ResultArray.toString();
     }
 
     /**
@@ -321,7 +305,7 @@ public class ReportServiceImp  implements ReportService {
         content=content+("-------------------------------------------"+'\n');
         System.out.println(content);
         System.out.println(JarFilePath.getParentFile().toString());
-        LogsUtil.Save(JarFilePath.getParentFile().toString(),content);
+        FileUtils.Save(JarFilePath.getParentFile().toString(),content);
         return  jsonArray.toString();
     }
 

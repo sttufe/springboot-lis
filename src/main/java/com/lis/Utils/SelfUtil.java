@@ -12,6 +12,4 @@ public  class SelfUtil {
         }else{r=object.toString();}
         return  r;
     }
-
-
 }

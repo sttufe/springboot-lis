@@ -68,3 +68,9 @@ jasypt:
     # 默认加密方式PBEWithMD5AndDES,可以更改为PBEWithMD5AndTripleDES
     algorithm: PBEWithMD5AndDES
     password: Bt%XJ^n1j8mz
+
+logging:
+  level:
+    root: info
+  file:
+    name: D://report//log.log
