@@ -7,22 +7,15 @@ import java.text.DecimalFormat;
 public class NumberUtil {
 
         /**
-         * 保留两位
+         * 保留小数点
          * @param d
          * @return
          */
-        public static double formatDouble2(double d) {
-            return new BigDecimal(d).setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
+        public static double formatDouble(double d,int Scale) {
+            return new BigDecimal(d).setScale(Scale, BigDecimal.ROUND_HALF_UP).doubleValue();
         }
 
-        /**
-         * 保留一位
-         * @param d
-         * @return
-         */
-        public static double formatDouble1(double d) {
-            return new BigDecimal(d).setScale(1, BigDecimal.ROUND_HALF_UP).doubleValue();
-        }
+
 
         /**
          * 元 转 分 -- 保证精度准确

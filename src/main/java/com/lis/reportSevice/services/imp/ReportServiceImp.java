@@ -329,7 +329,7 @@ public class ReportServiceImp  implements ReportService {
                   if (index==true&&Float.parseFloat(SelfUtil.IsNull(ro.getValue()).substring(0,ro.getValue().length()-1))>1.00){index=true;}*/
                }
         }
-        if(index==false){result =new JSONArray();}
+        //if(index==true){result =new JSONArray();}
         System.out.println(result);
         System.out.println("------------------------------------");
         return result;
@@ -452,6 +452,7 @@ public class ReportServiceImp  implements ReportService {
                             }}
                     }
                 }}
+
         }
         return reportOuts;
     }

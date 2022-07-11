@@ -7,11 +7,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-/**
- * @author: yc
- * @des: 时间工具类
- * @date: 2021/7/5 14:28
- */
+
 public class DateUtils {
 
     //年月日格式
@@ -21,9 +17,7 @@ public class DateUtils {
     private static final String Y_M_D_H_M_S = "yyyy-MM-dd HH:mm:ss";
 
     /**
-     * @author: yc
      * @des: 获取当前 年月日 时间字符串
-     * @date: 2021/7/5 14:29
      */
     public static String getCurrentYMDStr(){
         SimpleDateFormat sdf = new SimpleDateFormat(Y_M_D);

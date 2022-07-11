@@ -1,11 +1,11 @@
 package com.lis.api.Services.imp;
 
-import com.alibaba.fastjson.JSON;
+
 import com.alibaba.fastjson.JSONObject;
 import com.lis.api.Services.LoginServices;
 import com.lis.api.Services.MenuServices;
 import com.lis.api.entity.*;
-import lombok.extern.java.Log;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -70,11 +70,8 @@ public class LoginServicesImp  implements LoginServices {
 
     @Override
     public String options() {
-        Menu menu;
-        Route route;
-        menu= menuServices.getById(0);
-        route= JSONObject.toJavaObject(JSONObject.parseObject(menu.getJson()),Route.class);
-        return  JSONObject.toJSON(route).toString();
+
+        return  "";
     }
 
     @Override
@@ -141,11 +138,142 @@ public class LoginServicesImp  implements LoginServices {
 
     @Override
     public String getMenu() {
-        Menu menu;
-        Route route;
-        menu= menuServices.getById(0);
-        route= JSONObject.toJavaObject(JSONObject.parseObject(menu.getJson()),Route.class);
-        System.out.println(route.toString());
-        return  JSONObject.toJSON(route).toString();
+       String menu="{\n" +
+               "  \"code\": 200,\n" +
+               "  \"data\": [\n" +
+               "    {\n" +
+               "      \"redirect\": \"/element/icon\",\n" +
+               "      \"path\": \"/\",\n" +
+               "      \"component\": \"BasicLayout\",\n" +
+               "      \"name\": \"基础模板\",\n" +
+               "      \"icon\": \"AppleOutlined\",\n" +
+               "      \"pid\": 0,\n" +
+               "      \"id\": 1,\n" +
+               "      \"key\": \"layout\",\n" +
+               "      \"children\": [\n" +
+               "        {\n" +
+               "          \"redirect\": \"/element/icon\",\n" +
+               "          \"path\": \"/element\",\n" +
+               "          \"component\": \"RouteView\",\n" +
+               "          \"children\": [\n" +
+               "            {\n" +
+               "              \"redirect\": \"\",\n" +
+               "              \"path\": \"/element/icon\",\n" +
+               "              \"component\": \"/element/icon\",\n" +
+               "              \"keepAlive\": true,\n" +
+               "              \"name\": \"图标组件\",\n" +
+               "              \"icon\": \"\",\n" +
+               "              \"pid\": 2,\n" +
+               "              \"id\": 10,\n" +
+               "              \"key\": \"el_icon\"\n" +
+               "            },\n" +
+               "            {\n" +
+               "              \"redirect\": \"\",\n" +
+               "              \"path\": \"/element/table\",\n" +
+               "              \"component\": \"/element/table\",\n" +
+               "              \"name\": \"表格组件\",\n" +
+               "              \"icon\": \"\",\n" +
+               "              \"pid\": 2,\n" +
+               "              \"id\": 11,\n" +
+               "              \"key\": \"el_table\"\n" +
+               "            },\n" +
+               "            {\n" +
+               "              \"redirect\": \"\",\n" +
+               "              \"path\": \"/element/detail\",\n" +
+               "              \"component\": \"/element/detail\",\n" +
+               "              \"hidden\": true,\n" +
+               "              \"name\": \"详情\",\n" +
+               "              \"icon\": \"\",\n" +
+               "              \"pid\": 2,\n" +
+               "              \"id\": 12,\n" +
+               "              \"key\": \"detail\"\n" +
+               "            },\n" +
+               "            {\n" +
+               "              \"redirect\": \"\",\n" +
+               "              \"path\": \"/element/readexcel\",\n" +
+               "              \"component\": \"/element/readexcel\",\n" +
+               "              \"name\": \"Excel转JSON\",\n" +
+               "              \"icon\": \"\",\n" +
+               "              \"pid\": 2,\n" +
+               "              \"id\": 13,\n" +
+               "              \"key\": \"el_readexcel\"\n" +
+               "            }\n" +
+               "          ],\n" +
+               "          \"name\": \"好用组件\",\n" +
+               "          \"icon\": \"ChromeOutlined\",\n" +
+               "          \"pid\": 1,\n" +
+               "          \"id\": 2,\n" +
+               "          \"key\": \"element\"\n" +
+               "        },\n" +
+               "        {\n" +
+               "          \"redirect\": \"/maindate/\",\n" +
+               "          \"path\": \"/maindate\",\n" +
+               "          \"component\": \"RouteView\",\n" +
+               "          \"name\": \"主数据\",\n" +
+               "          \"icon\": \"AppleOutlined\",\n" +
+               "          \"pid\": 1,\n" +
+               "          \"id\": 3,\n" +
+               "          \"key\": \"maindate\",\n" +
+               "          \"children\": [\n" +
+               "            {\n" +
+               "              \"redirect\": \"\",\n" +
+               "              \"path\": \"/maindate/device/index\",\n" +
+               "              \"component\": \"/maindate/device/index\",\n" +
+               "              \"name\": \"设备设置\",\n" +
+               "              \"icon\": \"\",\n" +
+               "              \"pid\": 3,\n" +
+               "              \"id\": 31,\n" +
+               "              \"key\": \"maindate_device\"\n" +
+               "            },\n" +
+               "            {\n" +
+               "              \"redirect\": \"\",\n" +
+               "              \"path\": \"/maindate/labitem/index\",\n" +
+               "              \"component\": \"/maindate/labitem/index\",\n" +
+               "              \"name\": \"项目设置\",\n" +
+               "              \"icon\": \"\",\n" +
+               "              \"pid\": 3,\n" +
+               "              \"id\": 32,\n" +
+               "              \"key\": \"maindate_labitem\"\n" +
+               "            },\n" +
+               "            {\n" +
+               "              \"redirect\": \"\",\n" +
+               "              \"path\": \"/maindate/observation/index\",\n" +
+               "              \"component\": \"/maindate/observation/index\",\n" +
+               "              \"name\": \"指标设置\",\n" +
+               "              \"icon\": \"\",\n" +
+               "              \"pid\": 3,\n" +
+               "              \"id\": 33,\n" +
+               "              \"key\": \"maindate_observation\"\n" +
+               "            }\n" +
+               "          ]\n" +
+               "        },\n" +
+               "        {\n" +
+               "          \"redirect\": \"/serach/\",\n" +
+               "          \"path\": \"/serach\",\n" +
+               "          \"component\": \"RouteView\",\n" +
+               "          \"name\": \"统计查询\",\n" +
+               "          \"icon\": \"\",\n" +
+               "          \"pid\": 1,\n" +
+               "          \"id\": 99,\n" +
+               "          \"key\": \"serach\",\n" +
+               "          \"children\": [\n" +
+               "            {\n" +
+               "              \"redirect\": \"\",\n" +
+               "              \"path\": \"/serach/spemens/index\",\n" +
+               "              \"component\": \"/serach/spemens/index\",\n" +
+               "              \"name\": \"标本查询\",\n" +
+               "              \"icon\": \"\",\n" +
+               "              \"pid\": 99,\n" +
+               "              \"id\": 1,\n" +
+               "              \"key\": \"serach_spemens\"\n" +
+               "            }\n" +
+               "          ]\n" +
+               "        }\n" +
+               "      ]\n" +
+               "    }\n" +
+               "  ],\n" +
+               "  \"message\": \"信息返回成功\"\n" +
+               "}";
+        return  menu;
     }
 }
