@@ -43,7 +43,7 @@ public class ReportServiceImp  implements ReportService {
     java.io.File JarFilePath = h.getSource();
 
     //线程池 500 子线程
-    int nThreads=100;
+    int nThreads=300;
     ExecutorService pool = Executors.newFixedThreadPool(nThreads);
 
     /**
@@ -133,7 +133,7 @@ public class ReportServiceImp  implements ReportService {
      * @return  JsonParse
      */
     @Override
-    public String GetPositiveOfPCR(String b_data, String e_data,String SQLCondition,String quest_data,String condition) throws IOException {
+    public String GetPositiveOfPCR(String b_data, String e_data,String SQLCondition,String quest_data,String condition)   {
         long start=System.currentTimeMillis();
 
         log.info("----------------------------------------------");
@@ -150,13 +150,11 @@ public class ReportServiceImp  implements ReportService {
         List<String> itemsList = Arrays.asList(items);
         //任务队列
         List<CompletableFuture<List<ReportOut>>> Specimenfutures = new ArrayList<>();
-        //线程安全
-        Collections.synchronizedList(Specimenfutures);
+
+
         //CompletableFuture 提交任务 多线程并行处理
 
-        specimenRecList.forEach((i)->{
-            Specimenfutures.add(CompletableFuture.supplyAsync(()-> GetReportOut(i,itemsList),pool));
-        });
+        specimenRecList.forEach(i-> Specimenfutures.add(CompletableFuture.supplyAsync(()-> GetReportOut(i,itemsList),pool)));
         //阻塞 等待
         CompletableFuture.allOf(Specimenfutures.toArray(new CompletableFuture[0])).join();
         log.info(("计算结束-耗时-【"+(System.currentTimeMillis()-start)+"】ms"));
@@ -195,7 +193,7 @@ public class ReportServiceImp  implements ReportService {
      * @return  JsonParse
      */
     @Override
-    public String GetObstetricsItem(String b_data, String e_data,String SQLCondition,String quest_data,String condition) throws IOException {
+    public String GetObstetricsItem(String b_data, String e_data,String SQLCondition,String quest_data,String condition)  {
         long start=System.currentTimeMillis();
 
         log.info("----------------------------------------------");
@@ -209,15 +207,19 @@ public class ReportServiceImp  implements ReportService {
         log.info(("specimenRecList："+specimenRecList.size()));
         log.info(("耗时【"+(System.currentTimeMillis()-start)+"】ms"));
 
-       // String[] items=  condition.split(",");
-        String[] items={"艾乙梅(金标定性)(产免1)", "地中海贫血基因诊断"};
+        String[] items=  condition.split(",");
+       /* String[] items={"新型冠状病毒核酸检测(单检（可报销))"  ,  "新型冠状病毒核酸检测(单检自费)" ,
+                "新型冠状病毒核酸检测(快检免费)" ,  "新型冠状病毒核酸检测(快检自费)"};*/
+        log.info("condition:"+condition);
+
+       // String[] items={"艾乙梅(金标定性)(产免1)", "地中海贫血基因诊断"};
         List<String> itemsList = Arrays.asList(items);
 
         //任务队列
         List<CompletableFuture<List<ReportOut>>> Specimenfutures = new ArrayList<>();
 
-        //线程安全
-        Collections.synchronizedList(Specimenfutures);
+
+
         //CompletableFuture 提交任务 多线程并行处理
         for (Integer i: specimenRecList) {
             Specimenfutures.add(CompletableFuture.supplyAsync(()->
@@ -257,35 +259,50 @@ public class ReportServiceImp  implements ReportService {
      * @return  String
      */
     @Override
-    public String getInfectiousDiseases(String b_data, String e_data, String SQLCondition, String condition,String quest_data) throws IOException {
-        long start = System.currentTimeMillis();
-        String content="";
-        content=content+("开始执行:"+ DateUtils.getCurrentYMDHMSStr()+'\n');
-        content=content+("请求参数:【"+b_data+" "+e_data+"】"+'\n');
-        content=content+(("线程数量："+nThreads+'\n'));
+    public String getInfectiousDiseases(String b_data, String e_data, String SQLCondition, String condition,String quest_data,String observationItems)  {
 
-        List<DiagnosticreportRec> diagnosticreportList =reportMapper.getDiagnosticreportRecList(b_data,e_data,quest_data,SQLCondition);
+        long start = System.currentTimeMillis();
+
+        log.info("开始执行:"+ DateUtils.getCurrentYMDHMSStr());
+        log.info("请求参数:【"+b_data+" "+e_data+"】");
+        log.info(("线程数量："+nThreads));
+
+        //查出所有需要计算的标本
         List<Integer> specimenRecList =reportMapper.getSpecimenRec(b_data,e_data,quest_data,SQLCondition);
 
-        String[] items=  {"乙肝两对半定量检测", "感染性标志物检测(甲、乙、丙、艾滋、梅毒疾病筛查)", "(单病种)感染性标志物检测", "乙肝两对半定量+前S1"
-                          ,"乙肝两对半定性","乙肝表面抗原、丙、艾(计生取环专用)"};
-        String[] ObservationItems={"HR乙型肝炎病毒e抗原", "乙型肝炎病毒核心抗体", "乙型肝炎病毒e抗体", "HR乙型肝炎病毒表面抗原"};
+        log.info(specimenRecList.size()+"");
+        //项目  传入
+        condition=condition.replace(" ", "");
+        observationItems=observationItems.replace(" ", "");
+
+        String[] items=  condition.split(",");
         List<String> itemsList = Arrays.asList(items);
+
+        //指标  传入
+        String[] ObservationItems=observationItems.split(",");
+        log.info(observationItems);
         List<String>  ObservationItemsList=Arrays.asList(ObservationItems);
-        // 多线程
+
+
+        // 异步多线程
         List<CompletableFuture<List<ReportOut>>> Specimenfutures = new ArrayList<>();
         System.out.println(specimenRecList.size());
 
-        System.out.println("耗时【"+(System.currentTimeMillis()-start)+"】ms");
+        log.info("耗时【"+(System.currentTimeMillis()-start)+"】ms");
 
+        //任务队列
         for (Integer i: specimenRecList) {
             Specimenfutures.add(CompletableFuture.supplyAsync(()->
                     GetReportOut(i,itemsList),pool));}
 
+        //等待任务全部计算完成
         CompletableFuture.allOf(Specimenfutures.toArray(new CompletableFuture[0])).join();
-        content=content+(("计算结束-耗时-【"+(System.currentTimeMillis()-start)+"】ms"+'\n'));
 
+        log.info(("计算结束-耗时-【"+(System.currentTimeMillis()-start)+"】ms"));
+
+        //最终返回结果集合
         JSONArray jsonArray=new JSONArray();
+
         //获取结果
         for (CompletableFuture<List<ReportOut>> future : Specimenfutures) {
             try {
@@ -293,19 +310,18 @@ public class ReportServiceImp  implements ReportService {
                 if(!s.isEmpty()) {
                     //传入一个 s对象进来 把他做的乙肝相关的 项目拼接在后面返回
                     //HR乙型肝炎病毒e抗原', '乙型肝炎病毒核心抗体', '乙型肝炎病毒e抗体', 'HR乙型肝炎病毒表面抗原
-                    jsonArray.addAll(getHR_aspartate_HRalanine(s,ObservationItemsList));
+                    jsonArray.addAll(getHR_aspartate_HRalanine(s,ObservationItemsList,b_data,e_data,quest_data,SQLCondition));
                 }
             } catch (InterruptedException | ExecutionException e) {
                 e.printStackTrace();
             }
         }
-        content=content+(("返回:"+jsonArray.size()+"条记录"+'\n'));
-        content=content+(("耗时【"+(System.currentTimeMillis()-start)+"】ms"+'\n'));
-        content=content+(("程序结束:"+ DateUtils.getCurrentYMDHMSStr()+'\n'));
-        content=content+("-------------------------------------------"+'\n');
-        System.out.println(content);
-        System.out.println(JarFilePath.getParentFile().toString());
-        FileUtils.Save(JarFilePath.getParentFile().toString(),content);
+
+        log.info(("返回:"+jsonArray.size()+"条记录"));
+        log.info(("耗时【"+(System.currentTimeMillis()-start)+"】ms"));
+        log.info(("程序结束:"+ DateUtils.getCurrentYMDHMSStr()));
+        log.info("-------------------------------------------");
+
         return  jsonArray.toString();
     }
 
@@ -315,56 +331,87 @@ public class ReportServiceImp  implements ReportService {
      * @param s  JSONArray
      * @return
      */
-    public  JSONArray  getHR_aspartate_HRalanine(List<ReportOut> s, List<String> observationItemsList){
+    public  JSONArray  getHR_aspartate_HRalanine(List<ReportOut> s, List<String> observationItemsList,String  b_data,String e_data,String quest_data,String SQLCondition){
         JSONArray result=new JSONArray();
+        ReportOut report;
         boolean index=false;
+        String encounter="";
         for (ReportOut ro: s) {
              if(observationItemsList.contains(ro.getObservationName()))
                 result.add(JSONObject.toJSON(ro));
-
+                //index=false;
+             //乙肝表面抗原
               if(ro.getObservationName().equals("HR乙型肝炎病毒表面抗原"))
               {
-                 /* if (!SelfUtil.IsNull(ro.getValue()).substring(0,1).equals(">")==true){
-                      index=true;}
-                  if (index==true&&Float.parseFloat(SelfUtil.IsNull(ro.getValue()).substring(0,ro.getValue().length()-1))>1.00){index=true;}*/
+                  if (SelfUtil.IsNull(ro.getValue()).substring(0,1).equals(">"))
+                  {   encounter=ro.getEncounter();
+                      report=ro;
+                      index=true;continue;}
+                         // ||Float.parseFloat(SelfUtil.IsNull(ro.getValue()).substring(0,ro.getValue().length()-1))>1.00){index=true;}
+                  if (SelfUtil.IsNull(ro.getValue()).substring(0,1).equals("<"))
+                  {   encounter=ro.getEncounter();
+                      report=ro;
+                      index=false;continue;
+
+                  }
+
+                  if(Float.parseFloat(SelfUtil.IsNull(ro.getValue()).substring(0,ro.getValue().length()-1))>1.00)
+                  {   encounter=ro.getEncounter();
+                      report=ro;
+                      index=true;continue;
+                  }
                }
         }
-        //if(index==true){result =new JSONArray();}
-        System.out.println(result);
-        System.out.println("------------------------------------");
+       // JSONArray finalResult = result;
+        if(!index)result=new JSONArray();
+        //添加HR项目并跟到后面-只需要查询出结果即可
+
+
+        else{log.info(encounter+":"+index);
+        SQLCondition="and sr.servicerequest_code in (\n" +
+                "select\n" +
+                "\tcode\n" +
+                "from\n" +
+                "\tlab_item li\n" +
+                "where\n" +
+                "\tid in(\n" +
+                "\tselect\n" +
+                "\t\tlab_item_id\n" +
+                "\tfrom\n" +
+                "\t\tlabitem_observationdefinition lo\n" +
+                "\twhere\n" +
+                "\t\tobservationdefinition_id in(\n" +
+                "\t\tselect\n" +
+                "\t\t\tid\n" +
+                "\t\tfrom\n" +
+                "\t\t\tobservationdefinition o\n" +
+                "\t\twhere\n" +
+                "\t\t\tname in ('HR天门冬氨酸氨基转移酶', 'HR丙氨酸氨基转移酶' ))))\n" +
+                "and sr.encounter='"+encounter+"'";
+
+
+            reportMapper.getSpecimenRec(b_data, e_data, quest_data, SQLCondition).forEach((i)->{
+                    reportMapper.getObservations(i).forEach((o)->{
+                      JSONObject Ojson= (JSONObject) JSONObject.parse( o.getJson());
+                      if(Ojson.get("code_coding_display").toString().equals("HR丙氨酸氨基转移酶")||
+                              Ojson.get("code_coding_display").toString().equals("HR天门冬氨酸氨基转移酶")){
+                           /* finalResult.add(new ReportOut("","","","","","",
+                                    "","","","","","","",
+                                    Ojson.get("code_coding_display").toString(),Ojson.get("valueQuantity_value").toString(),"","",
+                                    "","",""));*/
+                      log.info(Ojson.get("code_coding_display").toString()+Ojson.get("valueQuantity_value").toString());}
+                    });
+
+                });
+
+
+        }
+
+
         return result;
     }
 
-    /**
-     * 封装SQLCondition
-     * @param b_data  开始时间
-     * @param e_data  结束时间
-     * @param SQLCondition  SQL条件
-     * @return  String SQLCondition
-     */
-    public String getSQLCondition(String b_data,String e_data,String SQLCondition ){
 
-        //所有申请报存
-        List<Servicerequest> ServicequestList =reportMapper.getServicerequests(b_data,e_data,SQLCondition);
-        Set<String>  encounters =new HashSet<>();
-        //存 门诊号 住院号
-        ServicequestList.forEach((s)->{
-            JSONObject jsonSQ;
-            jsonSQ= (JSONObject) JSONObject.parse(s.getJson());
-            String  encounter= SelfUtil.IsNull(jsonSQ.get("encounter_reference1encounter")) ;
-            if(!encounters.contains(encounter)){
-                encounters.add(encounter);
-            }});
-        SQLCondition="";
-        for ( String en:encounters) {
-            if(!en.isEmpty())
-                SQLCondition="\'"+en+"\',"+SQLCondition;
-        }
-        //拼凑 SQL条件
-        SQLCondition=" and  encounter_no  in ("+SQLCondition.substring(0,SQLCondition.length()-1)+")";
-        System.out.println(SQLCondition);
-        return SQLCondition;
-    }
 
     /**
      * 包装批量处理业务
@@ -380,9 +427,6 @@ public class ReportServiceImp  implements ReportService {
 
         SpecimenRec specimenRec=reportMapper.getSpecimenRecById(i);
         Specimen specimen=specimenService.getById(i);
-
-        // System.out.println("线程：" + Thread.currentThread().getName());
-
         JSONObject  json= (JSONObject) JSONObject.parse(specimen.getJson());
         //获取上机时间
         AtomicReference<String> timeDateTime= new AtomicReference<>("");
@@ -449,6 +493,7 @@ public class ReportServiceImp  implements ReportService {
                                             +SelfUtil.IsNull(tempJson.get("valueQuantity_value"))));
                                 }
                                 reportOuts.add(ro);
+
                             }}
                     }
                 }}

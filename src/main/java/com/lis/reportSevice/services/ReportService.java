@@ -15,5 +15,5 @@ public interface ReportService {
     String GetObstetricsItem(String b_data, String e_data,String SQLCondition,String quest_data,String condition) throws IOException;
 
     //免疫传染病
-    String getInfectiousDiseases(String b_data, String e_data,String SQLCondition,String condition,String quest_data) throws IOException;
+    String getInfectiousDiseases(String b_data, String e_data,String SQLCondition,String condition,String quest_data,String observationItems) ;
 }
