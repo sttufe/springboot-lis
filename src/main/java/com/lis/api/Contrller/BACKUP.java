@@ -34,3 +34,18 @@
 
                      return r;
                     })*/
+
+
+  /* reportMapper.getSpecimenRec(b_data, e_data, quest_data, SQLCondition).forEach((i)->{
+                    reportMapper.getObservations(i).forEach((o)->{
+                      JSONObject Ojson= (JSONObject) JSONObject.parse( o.getJson());
+                      if(Ojson.get("code_coding_display").toString().equals("HR天门冬氨酸氨基转移酶")|| Ojson.get("code_coding_display").toString().equals("HR丙氨酸氨基转移酶")){
+                          ReportOut ro;
+                          ro=re;
+                          ro.setObservationName(Ojson.get("code_coding_display").toString());
+                          ro.setValue(Ojson.get("valueQuantity_value").toString());
+                          jsonArray.add(ro);
+                      }
+                    });
+
+                });*/

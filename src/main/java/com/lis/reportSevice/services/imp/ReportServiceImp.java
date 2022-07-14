@@ -259,8 +259,9 @@ public class ReportServiceImp  implements ReportService {
      * @return  String
      */
     @Override
-    public String getInfectiousDiseases(String b_data, String e_data, String SQLCondition, String condition,String quest_data,String observationItems)  {
+    public String getInfectiousDiseases(String b_data, String e_data, String SQLCondition, String condition,String quest_data,String observationItems,String function)  {
 
+        log.info( b_data+":"+e_data+":"+SQLCondition+":"+condition+":"+quest_data+":"+observationItems);
         long start = System.currentTimeMillis();
 
         log.info("开始执行:"+ DateUtils.getCurrentYMDHMSStr());
@@ -270,7 +271,7 @@ public class ReportServiceImp  implements ReportService {
         //查出所有需要计算的标本
         List<Integer> specimenRecList =reportMapper.getSpecimenRec(b_data,e_data,quest_data,SQLCondition);
 
-        log.info(specimenRecList.size()+"");
+        log.info("specimenRecList:"+specimenRecList.size()+"");
         //项目  传入
         condition=condition.replace(" ", "");
         observationItems=observationItems.replace(" ", "");
@@ -310,7 +311,17 @@ public class ReportServiceImp  implements ReportService {
                 if(!s.isEmpty()) {
                     //传入一个 s对象进来 把他做的乙肝相关的 项目拼接在后面返回
                     //HR乙型肝炎病毒e抗原', '乙型肝炎病毒核心抗体', '乙型肝炎病毒e抗体', 'HR乙型肝炎病毒表面抗原
-                    jsonArray.addAll(getHR_aspartate_HRalanine(s,ObservationItemsList,b_data,e_data,quest_data,SQLCondition));
+                    //jsonArray.add(s);
+                    switch (function)
+                    {    //getWG
+                        case "getYGDX": jsonArray.addAll(getYGDX(s,ObservationItemsList,b_data, e_data, quest_data)); break;
+                        case "getYGDL": jsonArray.addAll(getYGDL(s,ObservationItemsList,b_data, e_data, quest_data)); break;
+                        case "getMD": jsonArray.addAll(getMD(s,ObservationItemsList,b_data, e_data, quest_data)); break;
+                        case "getBG": jsonArray.addAll(getBG(s,ObservationItemsList,b_data, e_data, quest_data)); break;
+                        case "getJG": jsonArray.addAll(getJG(s,ObservationItemsList,b_data, e_data, quest_data)); break;
+                        case "getWG": jsonArray.addAll(getWG(s,ObservationItemsList,b_data, e_data, quest_data)); break;
+                    }
+
                 }
             } catch (InterruptedException | ExecutionException e) {
                 e.printStackTrace();
@@ -328,47 +339,11 @@ public class ReportServiceImp  implements ReportService {
 
     /**
      * 获取 'HR天门冬氨酸氨基转移酶', 'HR丙氨酸氨基转移酶' 拼接在项目后面 没有则为空
-     * @param s  JSONArray
      * @return
      */
-    public  JSONArray  getHR_aspartate_HRalanine(List<ReportOut> s, List<String> observationItemsList,String  b_data,String e_data,String quest_data,String SQLCondition){
-        JSONArray result=new JSONArray();
-        ReportOut report;
-        boolean index=false;
-        String encounter="";
-        for (ReportOut ro: s) {
-             if(observationItemsList.contains(ro.getObservationName()))
-                result.add(JSONObject.toJSON(ro));
-                //index=false;
-             //乙肝表面抗原
-              if(ro.getObservationName().equals("HR乙型肝炎病毒表面抗原"))
-              {
-                  if (SelfUtil.IsNull(ro.getValue()).substring(0,1).equals(">"))
-                  {   encounter=ro.getEncounter();
-                      report=ro;
-                      index=true;continue;}
-                         // ||Float.parseFloat(SelfUtil.IsNull(ro.getValue()).substring(0,ro.getValue().length()-1))>1.00){index=true;}
-                  if (SelfUtil.IsNull(ro.getValue()).substring(0,1).equals("<"))
-                  {   encounter=ro.getEncounter();
-                      report=ro;
-                      index=false;continue;
-
-                  }
-
-                  if(Float.parseFloat(SelfUtil.IsNull(ro.getValue()).substring(0,ro.getValue().length()-1))>1.00)
-                  {   encounter=ro.getEncounter();
-                      report=ro;
-                      index=true;continue;
-                  }
-               }
-        }
-       // JSONArray finalResult = result;
-        if(!index)result=new JSONArray();
-        //添加HR项目并跟到后面-只需要查询出结果即可
-
-
-        else{log.info(encounter+":"+index);
-        SQLCondition="and sr.servicerequest_code in (\n" +
+    public  JSONArray  getHR_aspartate_HRalanine(String  b_data,String e_data,String quest_data,String encounter,ReportOut re){
+        JSONArray jsonArray =new JSONArray();
+        String  SQLCondition="and sr.servicerequest_code in (\n" +
                 "select\n" +
                 "\tcode\n" +
                 "from\n" +
@@ -389,28 +364,277 @@ public class ReportServiceImp  implements ReportService {
                 "\t\t\tname in ('HR天门冬氨酸氨基转移酶', 'HR丙氨酸氨基转移酶' ))))\n" +
                 "and sr.encounter='"+encounter+"'";
 
-
-            reportMapper.getSpecimenRec(b_data, e_data, quest_data, SQLCondition).forEach((i)->{
-                    reportMapper.getObservations(i).forEach((o)->{
-                      JSONObject Ojson= (JSONObject) JSONObject.parse( o.getJson());
-                      if(Ojson.get("code_coding_display").toString().equals("HR丙氨酸氨基转移酶")||
-                              Ojson.get("code_coding_display").toString().equals("HR天门冬氨酸氨基转移酶")){
-                           /* finalResult.add(new ReportOut("","","","","","",
-                                    "","","","","","","",
-                                    Ojson.get("code_coding_display").toString(),Ojson.get("valueQuantity_value").toString(),"","",
-                                    "","",""));*/
-                      log.info(Ojson.get("code_coding_display").toString()+Ojson.get("valueQuantity_value").toString());}
-                    });
-
-                });
-
-
+        List<Integer> list=reportMapper.getSpecimenRec(b_data, e_data, quest_data, SQLCondition);
+        for (Integer i: list) {
+            List<Observation> olist =reportMapper.getObservations(i);
+            for (Observation ro:olist) {
+                JSONObject Ojson= (JSONObject) JSONObject.parse( ro.getJson());
+                if(Ojson.get("code_coding_display").toString().equals("HR天门冬氨酸氨基转移酶")|| Ojson.get("code_coding_display").toString().equals("HR丙氨酸氨基转移酶")){
+                    ReportOut roportOut=new ReportOut();
+                   // roportOut=re;
+                    roportOut.setPatName(re.getPatName());
+                    roportOut.setObservationName(Ojson.get("code_coding_display").toString());
+                    roportOut.setValue(Ojson.get("valueQuantity_value").toString());
+                    jsonArray.add(roportOut);
+                }
+            }
         }
+        return jsonArray;
+    }
 
+    //乙肝 定性
+    public JSONArray  getYGDX(List<ReportOut> s, List<String> observationItemsList,String  b_data,String e_data,String quest_data){
 
+        JSONArray result=new JSONArray();
+        ReportOut report=new ReportOut();
+        boolean index=false;
+        String encounter="";
+        for (ReportOut ro: s) {
+            if(observationItemsList.contains(ro.getObservationName()))
+                result.add(JSONObject.toJSON(ro));
+            //index=false;
+            //乙肝表面抗原
+            if(ro.getObservationName().equals("HR乙型肝炎病毒表面抗原"))
+            {
+                if (SelfUtil.IsNull(ro.getValue()).substring(0,1).equals(">"))
+                {   encounter=ro.getEncounter();
+                    report=ro;
+                    index=true;
+                    continue;}
+                if (SelfUtil.IsNull(ro.getValue()).substring(0,1).equals("<"))
+                {   encounter=ro.getEncounter();
+                    report=ro;
+                    index=false;
+                    continue;
+                }
+
+                if(Float.parseFloat(SelfUtil.IsNull(ro.getValue()).substring(0,ro.getValue().length()-1))>1.00)
+                {   encounter=ro.getEncounter();
+                    report=ro;
+                    index=true;
+                    continue;
+                }
+            }
+        }
+        // JSONArray finalResult = result;
+        if(!index){result=new JSONArray();}
+            //计算肝功项目
+            else{
+                   // log.info(b_data,e_data,quest_data,encounter,report);
+                    JSONArray temp;
+                    temp=getHR_aspartate_HRalanine(b_data,e_data,quest_data,encounter,report);
+                    if (!temp.isEmpty()){result.addAll(temp);}
+                }
+        //添加HR项目并跟到后面-只需要查询出结果即可
         return result;
     }
 
+
+    //乙肝 定量
+    public JSONArray  getYGDL(List<ReportOut> s, List<String> observationItemsList,String  b_data,String e_data,String quest_data){
+       /* log.info("getYGDL");
+        log.info(observationItemsList.toString());*/
+
+        JSONArray result=new JSONArray();
+        ReportOut report=new ReportOut();
+        boolean index=false;
+        String encounter="";
+        for (ReportOut ro: s) {
+            if(observationItemsList.contains(ro.getObservationName()))
+                result.add(JSONObject.toJSON(ro));
+            log.info(ro.getValue());
+            //index=false;
+            //乙肝表面抗原
+            if(ro.getObservationName().equals("乙肝表面抗原HBsAg"))
+            {
+                if (SelfUtil.IsNull(ro.getValue()).contains("阳"))
+                {   log.info(ro.getValue());
+                    encounter=ro.getEncounter();
+                    report=ro;
+                    index=true;
+                    continue;}
+
+            }
+        }
+        // JSONArray finalResult = result;
+        if(!index){result=new JSONArray();}
+        //计算肝功项目
+        else{
+            // log.info(b_data,e_data,quest_data,encounter,report);
+            JSONArray temp;
+            temp=getHR_aspartate_HRalanine(b_data,e_data,quest_data,encounter,report);
+            if (!temp.isEmpty()){
+
+                result.addAll(temp);}
+
+        }
+        //添加HR项目并跟到后面-只需要查询出结果即可
+        return result;
+    }
+
+    //梅毒
+    public JSONArray  getMD(List<ReportOut> s, List<String> observationItemsList,String  b_data,String e_data,String quest_data){
+       /* log.info("getYGDL");
+        log.info(observationItemsList.toString());*/
+
+        JSONArray result=new JSONArray();
+        ReportOut report=new ReportOut();
+        boolean index=false;
+        String encounter="";
+        for (ReportOut ro: s) {
+            if(observationItemsList.contains(ro.getObservationName()))
+                result.add(JSONObject.toJSON(ro));
+            log.info(ro.getValue());
+            //index=false;
+            //乙肝表面抗原
+            if(ro.getObservationName().equals("梅毒螺旋体抗体"))
+            {   log.info(ro.getValue());
+                if (SelfUtil.IsNull(ro.getValue()).substring(0,1).equals(">"))
+                {   encounter=ro.getEncounter();
+                    report=ro;
+                    index=true;
+                    continue;}
+                if(Float.parseFloat(SelfUtil.IsNull(ro.getValue()).substring(0,ro.getValue().length()-1))>1.00)
+                {   encounter=ro.getEncounter();
+                    report=ro;
+                    index=true;
+                    continue;
+                }
+
+            }
+        }
+        // JSONArray finalResult = result;
+        if(!index){result=new JSONArray();}
+
+        //添加HR项目并跟到后面-只需要查询出结果即可
+        return result;
+    }
+
+    //丙肝
+    public JSONArray  getBG(List<ReportOut> s, List<String> observationItemsList,String  b_data,String e_data,String quest_data){
+
+        JSONArray result=new JSONArray();
+        ReportOut report=new ReportOut();
+        boolean index=false;
+        String encounter="";
+        for (ReportOut ro: s) {
+            if(observationItemsList.contains(ro.getObservationName()))
+                result.add(JSONObject.toJSON(ro));
+            log.info(ro.getValue());
+            //index=false;
+            //乙肝表面抗原
+            if(ro.getObservationName().equals("丙型肝炎抗体"))
+            {   log.info(ro.getValue());
+                if (SelfUtil.IsNull(ro.getValue()).substring(0,1).equals(">"))
+                {   encounter=ro.getEncounter();
+                    report=ro;
+                    index=true;
+                    continue;}
+                if(Float.parseFloat(SelfUtil.IsNull(ro.getValue()).substring(0,ro.getValue().length()-1))>1.00)
+                {   encounter=ro.getEncounter();
+                    report=ro;
+                    index=true;
+                    continue;
+                }
+
+            }
+        }
+        // JSONArray finalResult = result;
+        if(!index){result=new JSONArray();}
+        else{
+            // log.info(b_data,e_data,quest_data,encounter,report);
+            JSONArray temp;
+            temp=getHR_aspartate_HRalanine(b_data,e_data,quest_data,encounter,report);
+            if (!temp.isEmpty()){result.addAll(temp);}
+        }
+
+        //添加HR项目并跟到后面-只需要查询出结果即可
+        return result;
+    }
+
+    //甲肝
+    public JSONArray  getJG(List<ReportOut> s, List<String> observationItemsList,String  b_data,String e_data,String quest_data){
+
+        JSONArray result=new JSONArray();
+        ReportOut report=new ReportOut();
+        boolean index=false;
+        String encounter="";
+        for (ReportOut ro: s) {
+            if(observationItemsList.contains(ro.getObservationName()))
+                result.add(JSONObject.toJSON(ro));
+            log.info(ro.getValue());
+            //index=false;
+            //乙肝表面抗原
+            if(ro.getObservationName().equals("甲型肝炎抗体(Anti-HAV)测定(IgM)"))
+            {   log.info(ro.getValue());
+                if (SelfUtil.IsNull(ro.getValue()).substring(0,1).equals(">"))
+                {   encounter=ro.getEncounter();
+                    report=ro;
+                    index=true;
+                    continue;}
+                if(Float.parseFloat(SelfUtil.IsNull(ro.getValue()).substring(0,ro.getValue().length()-1))>1.00)
+                {   encounter=ro.getEncounter();
+                    report=ro;
+                    index=true;
+                    continue;
+                }
+
+            }
+        }
+        // JSONArray finalResult = result;
+        if(!index){result=new JSONArray();}
+        else{
+            // log.info(b_data,e_data,quest_data,encounter,report);
+            JSONArray temp;
+            temp=getHR_aspartate_HRalanine(b_data,e_data,quest_data,encounter,report);
+            if (!temp.isEmpty()){result.addAll(temp);}
+        }
+
+        //添加HR项目并跟到后面-只需要查询出结果即可
+        return result;
+    }
+
+    //戊肝
+    public JSONArray  getWG(List<ReportOut> s, List<String> observationItemsList,String  b_data,String e_data,String quest_data){
+       /* log.info("getYGDL");
+        log.info(observationItemsList.toString());*/
+
+        JSONArray result=new JSONArray();
+        ReportOut report=new ReportOut();
+        boolean index=false;
+        String encounter="";
+        for (ReportOut ro: s) {
+            if(observationItemsList.contains(ro.getObservationName()))
+                result.add(JSONObject.toJSON(ro));
+            log.info(ro.getValue());
+            //index=false;
+            //乙肝表面抗原
+            if(ro.getObservationName().equals("戊肝-IgG(抗-HEV-G)"))
+            {
+                if (SelfUtil.IsNull(ro.getValue()).contains("阳"))
+                {   log.info(ro.getValue());
+                    encounter=ro.getEncounter();
+                    report=ro;
+                    index=true;
+                    continue;}
+
+            }
+        }
+        // JSONArray finalResult = result;
+        if(!index){result=new JSONArray();}
+        //计算肝功项目
+        else{
+            // log.info(b_data,e_data,quest_data,encounter,report);
+            JSONArray temp;
+            temp=getHR_aspartate_HRalanine(b_data,e_data,quest_data,encounter,report);
+            if (!temp.isEmpty()){
+
+                result.addAll(temp);}
+
+        }
+        //添加HR项目并跟到后面-只需要查询出结果即可
+        return result;
+    }
 
 
     /**

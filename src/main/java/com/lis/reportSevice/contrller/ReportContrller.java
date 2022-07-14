@@ -84,8 +84,9 @@ public class ReportContrller {
                                         @RequestParam(value = "SQLCondition") String SQLCondition,
                                         @RequestParam(value = "condition", required = false) String condition,
                                         @RequestParam(value = "quest_data", required = false) String quest_data,
-                                        @RequestParam(value = "observationItems", required = false) String observationItems) throws IOException {
+                                        @RequestParam(value = "observationItems", required = false) String observationItems,
+                                        @RequestParam(value = "function", required = false) String function)  {
 
-        return reportService.getInfectiousDiseases(b_data,e_data,SQLCondition,condition,quest_data,observationItems);
+        return reportService.getInfectiousDiseases(b_data,e_data,SQLCondition,condition,quest_data,observationItems,function);
     }
 }

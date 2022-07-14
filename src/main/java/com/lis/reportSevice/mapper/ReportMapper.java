@@ -82,5 +82,4 @@ public interface ReportMapper extends BaseMapper<Object> {
     @Select("select *  from observation o2  where id in (\n" +
             "select id   from observation_rec or2 where \"specimen_reference1Specimen\" =\'${specimen_id}\' and status<>'cancelled') ")
     List<Observation> getObservations(@Param("specimen_id") Integer specimen_id);
-
 }
